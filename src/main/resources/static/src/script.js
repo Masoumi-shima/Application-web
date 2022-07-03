@@ -8,6 +8,12 @@ const passedExam = document.querySelector('input[name="passedExam"]')
 const genderField = document.getElementById('gender')
 const message = document.getElementById('successMsg')
 const inputs = [firstName, lastName, birthDate, email]
+const genderFields = [
+    document.getElementById("female"),
+    document.getElementById("male"),
+    document.getElementById("other")
+]
+
 
 message.classList.add('hidden')
 let areInputsValid = false
@@ -15,8 +21,8 @@ let responseStatus;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    inputs.forEach(validateInputs)
-    genderIsSelected()
+    // inputs.forEach(validateInputs)
+    // genderIsSelected()
     renderServerResponse()
 });
 
@@ -26,8 +32,10 @@ inputs.forEach(input => {
     });
 })
 
-genderField.addEventListener('change',() => {
-  genderIsSelected()
+genderFields.forEach(value => {
+    value.addEventListener('change', () => {
+        genderIsSelected()
+    })
 })
 
 function validateInputs(inputBox)
