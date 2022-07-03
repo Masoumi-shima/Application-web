@@ -34,8 +34,7 @@ public class Member
 
     @NotEmpty(message = "email| Entrez votre adresse courriel.")
     @Email(message = "email| L'addresse courriel n'est pas valide.")
-    @Column(nullable = false,
-            unique = true)
+    @Column(nullable = false)
 
     private String email;
 
