@@ -15,8 +15,8 @@ let responseStatus;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    // inputs.forEach(validateInputs)
-    // genderIsSelected()
+    inputs.forEach(validateInputs)
+    genderIsSelected()
     renderServerResponse()
 });
 
