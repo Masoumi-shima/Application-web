@@ -1,0 +1,111 @@
+.title {
+    background-image: linear-gradient(
+        to right,
+        rgb(0, 66, 114) 0%,
+        rgb(4, 56, 109) 100%
+    );
+    font-size: 24px;
+    text-align: center;
+    color: aliceblue;
+    padding: 10px;
+}
+
+body {
+    margin: 0px;
+    font-family: "Lato", sans-serif;
+}
+
+form {
+    padding: 40px;
+    font-size: 20px;
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.radio-box label {
+    display: inline;
+    font-size: 15px;
+}
+
+p {
+    margin: 10px;
+}
+.check-box label {
+    display: inline;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.form-box input {
+    width: 300px;
+    padding: 10px;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.radio-box input {
+    width: auto;
+}
+
+.check-box input {
+    width: auto;
+    margin-top: 30px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: rgb(4, 56, 109);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.hidden {
+    display: none;
+}
+
+input.invalid {
+    border: 1px solid red;
+    margin-bottom: 10px;
+}
+
+.error-hint {
+    color: red;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+button {
+    font-size: 17px;
+    padding: 10px;
+    background: none;
+    border: 1px solid rgb(4, 56, 109);
+    border-radius: 10px;
+    margin: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(4, 56, 109);
+    color: white;
+}
+
+.success-msg {
+    background-image: linear-gradient(
+            to right,
+            rgb(128, 171, 203) 0%,
+            rgb(60, 94, 128) 100%
+    );
+    font-size: 20px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-info {
+    font-weight: lighter;
+}
