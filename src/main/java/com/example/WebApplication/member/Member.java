@@ -4,6 +4,7 @@ import com.example.WebApplication.validations.EnumValidator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -20,20 +21,21 @@ public class Member
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
-    @NotEmpty(message = "firstName| Entrez votre prénom.")
+    @NotEmpty(message = "Entrez votre prénom.")
     @Column(nullable = false)
     private String firstName;
 
-    @NotEmpty(message = "lastName| Entrez votre nom.")
+    @NotEmpty(message = "Entrez votre nom.")
     @Column(nullable = false)
     private String lastName;
 
-    @NotNull(message = "birthDate| Entrez votre date de naissance.")
+    @NotNull(message = "Entrez votre date de naissance.")
     @Column(nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
-    @NotEmpty(message = "email| Entrez votre adresse courriel.")
-    @Email(message = "email| L'addresse courriel n'est pas valide.")
+    @NotEmpty(message = "Entrez votre adresse courriel.")
+    @Email(message = "L'addresse courriel n'est pas valide.")
     @Column(nullable = false)
 
     private String email;

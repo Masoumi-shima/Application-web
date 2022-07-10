@@ -54,12 +54,4 @@ public class MemberController
         modelAndView.addObject("member", member);
         return modelAndView;
     }
-//    @ResponseBody
-//    @PostMapping("/api/v1/member")
-//    public ResponseEntity<Member> addNewMember(@Validated @RequestBody Member member)
-//    {
-//        memberService.addNewMember(member);
-//        return new ResponseEntity<>(member, HttpStatus.OK);
-//    }
-
 }

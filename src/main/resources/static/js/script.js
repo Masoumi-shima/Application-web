@@ -1,23 +1,7 @@
-const form = document.querySelector('form')
-const firstName = document.querySelector('input[name = "firstName"]')
-const lastName = document.querySelector('input[name= "lastName"]')
-const birthDate = document.querySelector('input[name= "birthDate"]')
-const email = document.querySelector('input[name= "email"]')
-const gender = document.querySelector('input[name="gender"]:checked')
-const passedExam = document.querySelector('input[name="passedExam"]')
-const genderField = document.getElementById('gender')
-// const message1 = document.getElementById('successMsg')
-const inputs = [firstName, lastName, birthDate, email]
-const genderFields = [
-    document.getElementById("female"),
-    document.getElementById("male"),
-    document.getElementById("other")
-]
+import {form, firstName, lastName, birthDate, email, genderField, genderFields} from "./formData.js"
 
-
-// message1.classList.add('hidden')
+let inputs = [firstName, lastName, birthDate, email]
 let areInputsValid = false
-let responseStatus;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -43,7 +27,6 @@ genderFields.forEach(value => {
 
 function validateInputs(inputBox)
 {
-    console.log("Bullshitvalid")
     inputBox.classList.remove('invalid')
     inputBox.nextElementSibling.classList.add('hidden')
     areInputsValid = true
@@ -61,83 +44,11 @@ function genderIsSelected()
     genderField.nextElementSibling.classList.add('hidden')
     if (document.querySelector('input[name="gender"]:checked') != null)
     {
-        return true
+        areInputsValid = true
     }
     else
     {
         genderField.nextElementSibling.classList.remove('hidden')
-        return null
-    }
-}
-
-function getGender()
-{
-    if (document.querySelector('input[name="gender"]:checked') === null)
-    {
-        return null
-    }
-    else return document.querySelector('input[name="gender"]:checked').value
-}
-
-async function sendInformationToServer()
-{
-    console.log("Bullshitsend")
-    let url = 'http://localhost:8080/api/v1/member'
-    try {
-        let res = await fetch(url,
-            {
-                method: 'POST',
-                body: JSON.stringify(
-                    {
-                        member :{
-                            "firstName": firstNameVal,
-                            "lastName": lastName.value,
-                            "birthDate": birthDate.value,
-                            "email": email.value,
-                            "gender": getGender(),
-                            "passedExam": passedExam.checked
-                        }
-                    }),
-                headers:
-                    {
-                        'Content-type': 'application/json'
-                    }
-            });
-        responseStatus = res.status
-        return await res.json()
-    }
-    catch (error)
-    {
-        console.log(error)
-    }
-}
-
-async function renderServerResponse()
-{
-    console.log("Bullshitrender")
-    let serverResponse = await sendInformationToServer()
-    // if (responseStatus === 200)
-    // {
-    //     form.remove()
-    //     message.classList.remove('hidden')
-    //     message.innerHTML += " Vos informations sont enregistrées!"
-    //     document.getElementById("enteredFirstName").innerHTML += serverResponse.firstName
-    //     document.getElementById("enteredLastName").innerHTML += serverResponse.lastName
-    //     document.getElementById("enteredBirthDate").innerHTML += serverResponse.birthDate
-    //     document.getElementById("enteredEmail").innerHTML += serverResponse.email
-    //     document.getElementById("enteredGender").innerHTML += serverResponse.gender
-    // }
-
-    if (responseStatus === 400)
-    {
-        let invalidInput = serverResponse.field
-        switch(true)
-        {
-            case invalidInput.includes("firstName") : validateInputs(firstName)
-            case invalidInput.includes("lastName"): validateInputs(lastName)
-            case invalidInput.includes("birthDate"): validateInputs(birthDate)
-            case invalidInput.includes("email"): validateInputs(email)
-            case invalidInput.includes("gender"): genderIsSelected()
-        }
+        areInputsValid = false
     }
 }

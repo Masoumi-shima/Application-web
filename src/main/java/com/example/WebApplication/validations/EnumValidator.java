@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = EnumValidator.ValueOfEnumValidator.class)
 public @interface EnumValidator
 {
-    String message() default "gender| Choisissez une option: MALE, FEMALE, OTHER";
+    String message() default "Choisissez une option: MALE, FEMALE, OTHER";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     Class<Gender> enumClass();
