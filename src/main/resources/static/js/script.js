@@ -108,19 +108,19 @@ async function sendInformationToServer()
 async function renderServerResponse()
 {
     let serverResponse = await sendInformationToServer()
-    if (responseStatus === 200)
-    {
-        form.remove()
-        message.classList.remove('hidden')
-        message.innerHTML += " Vos informations sont enregistrées!"
-        document.getElementById("enteredFirstName").innerHTML += serverResponse.firstName
-        document.getElementById("enteredLastName").innerHTML += serverResponse.lastName
-        document.getElementById("enteredBirthDate").innerHTML += serverResponse.birthDate
-        document.getElementById("enteredEmail").innerHTML += serverResponse.email
-        document.getElementById("enteredGender").innerHTML += serverResponse.gender
-    }
+    // if (responseStatus === 200)
+    // {
+    //     form.remove()
+    //     message.classList.remove('hidden')
+    //     message.innerHTML += " Vos informations sont enregistrées!"
+    //     document.getElementById("enteredFirstName").innerHTML += serverResponse.firstName
+    //     document.getElementById("enteredLastName").innerHTML += serverResponse.lastName
+    //     document.getElementById("enteredBirthDate").innerHTML += serverResponse.birthDate
+    //     document.getElementById("enteredEmail").innerHTML += serverResponse.email
+    //     document.getElementById("enteredGender").innerHTML += serverResponse.gender
+    // }
 
-    else if (responseStatus === 400)
+    if (responseStatus === 400)
     {
         let invalidInput = serverResponse.field
         switch(true)

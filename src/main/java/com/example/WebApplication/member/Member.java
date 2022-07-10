@@ -1,6 +1,7 @@
 package com.example.WebApplication.member;
 
 import com.example.WebApplication.validations.EnumValidator;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table
+@Data
 public class Member
 {
     @Id
@@ -57,66 +59,6 @@ public class Member
         this.birthDate = birthDate;
         this.email = email;
         this.passedExam = passedExam;
-        this.gender = gender;
-    }
-
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getBirthDate()
-    {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate)
-    {
-        this.birthDate = birthDate;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public boolean getPassedExam()
-    {
-        return passedExam;
-    }
-
-    public void setPassedExam(boolean passedExam)
-    {
-        this.passedExam = passedExam;
-    }
-
-    public Gender getGender()
-    {
-        return gender;
-    }
-
-    public void setGender(Gender gender)
-    {
         this.gender = gender;
     }
 }
