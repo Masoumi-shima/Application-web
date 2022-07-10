@@ -6,7 +6,7 @@ const email = document.querySelector('input[name= "email"]')
 const gender = document.querySelector('input[name="gender"]:checked')
 const passedExam = document.querySelector('input[name="passedExam"]')
 const genderField = document.getElementById('gender')
-const message = document.getElementById('successMsg')
+// const message1 = document.getElementById('successMsg')
 const inputs = [firstName, lastName, birthDate, email]
 const genderFields = [
     document.getElementById("female"),
@@ -15,20 +15,23 @@ const genderFields = [
 ]
 
 
-message.classList.add('hidden')
+// message1.classList.add('hidden')
 let areInputsValid = false
 let responseStatus;
 
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault()
     inputs.forEach(validateInputs)
     genderIsSelected()
-    renderServerResponse()
+    if (areInputsValid)
+    {
+        e.currentTarget.submit()
+    }
 });
 
 inputs.forEach(input => {
     input.addEventListener('input', () => {
-    validateInputs(input)
+        validateInputs(input)
     });
 })
 
@@ -40,6 +43,7 @@ genderFields.forEach(value => {
 
 function validateInputs(inputBox)
 {
+    console.log("Bullshitvalid")
     inputBox.classList.remove('invalid')
     inputBox.nextElementSibling.classList.add('hidden')
     areInputsValid = true
@@ -57,12 +61,12 @@ function genderIsSelected()
     genderField.nextElementSibling.classList.add('hidden')
     if (document.querySelector('input[name="gender"]:checked') != null)
     {
-      return true
+        return true
     }
     else
     {
-      genderField.nextElementSibling.classList.remove('hidden')
-      return null
+        genderField.nextElementSibling.classList.remove('hidden')
+        return null
     }
 }
 
@@ -77,36 +81,40 @@ function getGender()
 
 async function sendInformationToServer()
 {
+    console.log("Bullshitsend")
     let url = 'http://localhost:8080/api/v1/member'
     try {
-      let res = await fetch(url,
-        {
-                    method: 'POST',
-                    body: JSON.stringify(
-                        {
-                        "firstName": firstName.value,
-                        "lastName": lastName.value,
-                        "birthDate": birthDate.value,
-                        "email": email.value,
-                        "gender": getGender(),
-                        "passedExam": passedExam.checked
+        let res = await fetch(url,
+            {
+                method: 'POST',
+                body: JSON.stringify(
+                    {
+                        member :{
+                            "firstName": firstNameVal,
+                            "lastName": lastName.value,
+                            "birthDate": birthDate.value,
+                            "email": email.value,
+                            "gender": getGender(),
+                            "passedExam": passedExam.checked
+                        }
                     }),
-                    headers:
-                        {
-                      'Content-type': 'application/json'
+                headers:
+                    {
+                        'Content-type': 'application/json'
                     }
-                  });
-      responseStatus = res.status
-      return await res.json()
+            });
+        responseStatus = res.status
+        return await res.json()
     }
     catch (error)
     {
-      console.log(error)
+        console.log(error)
     }
 }
 
 async function renderServerResponse()
 {
+    console.log("Bullshitrender")
     let serverResponse = await sendInformationToServer()
     // if (responseStatus === 200)
     // {

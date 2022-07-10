@@ -1,15 +1,11 @@
 package com.example.WebApplication.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @RestController
 public class MemberController
@@ -24,7 +20,7 @@ public class MemberController
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping({"/api/v1/member","/"})
+    @GetMapping({ "/"})
     public ModelAndView loadPage()
     {
         ModelAndView modelAndView = new ModelAndView("form");
@@ -34,16 +30,36 @@ public class MemberController
     }
 
     @PostMapping("/api/v1/member")
-    public ModelAndView submitForm(@ModelAttribute("member") Member member) {
-        memberService.addNewMember(member);
-        return new ModelAndView("confirmation");
-    }
-    @ResponseBody
-    @PostMapping("/api/v1/member")
-    public ResponseEntity<Member> addNewMember(@Validated @RequestBody Member member)
+    public ModelAndView submitForm(@Validated @ModelAttribute("member") Member member,BindingResult bindingResult)
     {
-        memberService.addNewMember(member);
-        return new ResponseEntity<>(member, HttpStatus.OK);
+        if (bindingResult.hasErrors())
+        {
+            ModelAndView modelAndView = new ModelAndView("form", HttpStatus.BAD_REQUEST);
+            modelAndView.addObject("member", member);
+            return modelAndView;
+        }
+        else
+        {
+            memberService.addNewMember(member);
+            String memberId = member.getId();
+            return new ModelAndView("redirect:/api/v1/confirmation?id=" + memberId);
+        }
     }
+
+    @GetMapping({"/api/v1/confirmation"})
+    public ModelAndView showConfirmation(@RequestParam String id)
+    {
+        Member member = memberRepository.findById(id).get();
+        ModelAndView modelAndView = new ModelAndView("confirmation");
+        modelAndView.addObject("member", member);
+        return modelAndView;
+    }
+//    @ResponseBody
+//    @PostMapping("/api/v1/member")
+//    public ResponseEntity<Member> addNewMember(@Validated @RequestBody Member member)
+//    {
+//        memberService.addNewMember(member);
+//        return new ResponseEntity<>(member, HttpStatus.OK);
+//    }
 
 }

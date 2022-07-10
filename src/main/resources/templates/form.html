@@ -21,19 +21,24 @@
             <div class="form-box">
                 <label for="firstName">Prénom</label>
                 <input type="text" th:field="*{firstName}" class="" name="firstName" id="firstName" placeholder="Prénom">
+                <div class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
                 <label for="lastName">Nom</label>
                 <input type="text" th:field="*{lastName}" class="" name="lastName" id="lastName" placeholder="Nom">
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+                <div class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error></div>
                 <label for="birthDate">Date de naissance</label>
                 <input type="date" th:field="*{birthDate}" class="" name="birthDate" id="birthDate" placeholder="Date de naissance">
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+                <div class="error-hint" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Name Error></div>
                 <label for="email">Adresse courriel</label>
                 <input type="email" th:field="*{email}" class="" name="email" id="email" placeholder="abc@abc.com">
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+                <div class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error></div>
                 <div class="radio-box">
                     <p name="gender-selection" id="gender">Genre:</p>
                     <div class="error-hint hidden">Choisissez une option.</div>
+                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error></div>
                     <input type="radio" name="gender" id="female" value="FEMALE">
                     <label for="female">Female</label><br>
                     <input type="radio" name="gender" id="male" value="MALE">

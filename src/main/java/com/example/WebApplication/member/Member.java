@@ -3,6 +3,8 @@ package com.example.WebApplication.member;
 import com.example.WebApplication.validations.EnumValidator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -14,13 +16,9 @@ import java.time.LocalDate;
 public class Member
 {
     @Id
-    @SequenceGenerator(name = "member_sequence",
-            sequenceName = "member_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "member_sequence")
-    private Long id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
     @NotEmpty(message = "firstName| Entrez votre prénom.")
     @Column(nullable = false)
