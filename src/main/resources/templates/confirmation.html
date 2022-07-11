@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Confirmation</title>
+        <link th:href="@{/css/style.css}" rel="stylesheet">
+        <link
+                href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+                rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="success-msg" id="successMsg" th:object="${member}">
+            <h3>"Vos informations sont enregistrées!"</h3>
+            <span>Prénom : </span><span th:text="*{firstName}" id="prénom"></span><br/>
+            <span>Nom : </span><span th:text="*{lastName}" id="nom"></span><br/>
+            <span>Date de naissance : </span><span th:text="*{birthDate}" id="dateDeNaissance"></span><br/>
+            <span>Adressse courriel : </span><span th:text="*{email}" id="adresseCourriel"></span><br/>
+            <span>Gender : </span><span th:text="*{gender}" id="gender"></span><br/>
+
+        </div>
+    </body>
+</html>

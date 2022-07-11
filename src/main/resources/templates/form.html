@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Formulaire d'enregistrement</title>
-    <link rel="stylesheet" href="../static/src/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <link
     href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
     rel="stylesheet"
@@ -17,22 +17,32 @@
         <h1>Formulaire d'enregistrement</h1>
     </div>
     <div>
-        <form id="membershipForm" action="#" method="POST">
+        <form th:action="@{/api/v1/member}" th:object="${member}" id="membershipForm" method="POST">
             <div class="form-box">
+
                 <label for="firstName">Prénom</label>
-                <input type="text" class="" name="firstName" id="firstName" placeholder="Prénom">
+                <input type="text" th:field="*{firstName}" class="" name="firstName" id="firstName" placeholder="Prénom">
+                <div class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+
                 <label for="lastName">Nom</label>
-                <input type="text" class="" name="lastName" id="lastName" placeholder="Nom">
+                <input type="text" th:field="*{lastName}" class="" name="lastName" id="lastName" placeholder="Nom">
+                <div class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+
                 <label for="birthDate">Date de naissance</label>
-                <input type="date" class="" name="birthDate" id="birthDate" placeholder="Date de naissance">
+                <input type="date" th:field="*{birthDate}" class="" name="birthDate" id="birthDate" placeholder="Date de naissance">
+                <div class="error-hint" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+
                 <label for="email">Adresse courriel</label>
-                <input type="email" class="" name="email" id="email" placeholder="abc@abc.com">
+                <input type="email" th:field="*{email}" class="" name="email" id="email" placeholder="abc@abc.com">
+                <div class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+
                 <div class="radio-box">
                     <p name="gender-selection" id="gender">Genre:</p>
+                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error></div>
                     <div class="error-hint hidden">Choisissez une option.</div>
                     <input type="radio" name="gender" id="female" value="FEMALE">
                     <label for="female">Female</label><br>
@@ -41,22 +51,17 @@
                     <input type="radio" name="gender" id="other" value="OTHER">
                     <label for="other">Other</label><br>
                 </div>
+
                 <div class="check-box">
                     <input type="checkbox" name="passedExam" id="passedExam" value="true">
                     <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>
                 </div>
+
             </div>
         <hr />
             <button type="submit" name="submitForm" id="submitForm">Enregistrez</button>
             <button type="reset" name="resetForm" id="resetForm">Réinitialisez</button>
         </form>
-        <div class="success-msg" id="successMsg">
-            <p id="prénom">Prénom: <p class="user-info" id="enteredFirstName"></p>
-            <p id="nom">Nom: <p class="user-info" id="enteredLastName" ></p></p>
-            <p id="dateDeNaissance">Date de naissance: <p class="user-info" id="enteredBirthDate"></p></p>
-            <p id="adresseCourriel">Adressse courriel: <p class="user-info" id="enteredEmail"></p></p>
-            <p id="genre">Genre: <p class="user-info" id="enteredGender"></p></p>
-        </div>
     </div>
-    <script src="../static/src/script.js"></script>
+    <script type="module" th:src="@{/js/script.js}"></script>
 </body>

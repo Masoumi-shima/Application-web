@@ -1,7 +1,11 @@
 package com.example.WebApplication.member;
 
 import com.example.WebApplication.validations.EnumValidator;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -9,31 +13,29 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table
+@Data
 public class Member
 {
     @Id
-    @SequenceGenerator(name = "member_sequence",
-            sequenceName = "member_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "member_sequence")
-    private Long id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
 
-    @NotEmpty(message = "firstName| Entrez votre prénom.")
+    @NotEmpty(message = "Entrez votre prénom.")
     @Column(nullable = false)
     private String firstName;
 
-    @NotEmpty(message = "lastName| Entrez votre nom.")
+    @NotEmpty(message = "Entrez votre nom.")
     @Column(nullable = false)
     private String lastName;
 
-    @NotNull(message = "birthDate| Entrez votre date de naissance.")
+    @NotNull(message = "Entrez votre date de naissance.")
     @Column(nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthDate;
 
-    @NotEmpty(message = "email| Entrez votre adresse courriel.")
-    @Email(message = "email| L'addresse courriel n'est pas valide.")
+    @NotEmpty(message = "Entrez votre adresse courriel.")
+    @Email(message = "L'addresse courriel n'est pas valide.")
     @Column(nullable = false)
 
     private String email;
@@ -57,66 +59,6 @@ public class Member
         this.birthDate = birthDate;
         this.email = email;
         this.passedExam = passedExam;
-        this.gender = gender;
-    }
-
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getBirthDate()
-    {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate)
-    {
-        this.birthDate = birthDate;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public boolean getPassedExam()
-    {
-        return passedExam;
-    }
-
-    public void setPassedExam(boolean passedExam)
-    {
-        this.passedExam = passedExam;
-    }
-
-    public Gender getGender()
-    {
-        return gender;
-    }
-
-    public void setGender(Gender gender)
-    {
         this.gender = gender;
     }
 }
