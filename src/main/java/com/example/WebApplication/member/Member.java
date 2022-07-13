@@ -1,16 +1,19 @@
 package com.example.WebApplication.member;
 
 import com.example.WebApplication.validations.EnumValidator;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 @Data
@@ -47,18 +50,42 @@ public class Member
     @Column(nullable = false)
     private Gender gender;
 
+//    @org.springframework.data.annotation.Transient
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permit_number_seq")
+//    @GenericGenerator(
+//            name = "permit_number_seq",
+//            strategy = "com.example.WebApplication.member.PermitNumberGenerator",
+//            parameters = {
+//                    @org.hibernate.annotations
+//                            .Parameter(name = PermitNumberGenerator.INCREMENT_PARAM, value = "50"),
+//                    @org.hibernate.annotations
+//                            .Parameter(name = PermitNumberGenerator.VALUE_PREFIX_PARAMETER, value = "A"),
+//                    @org.hibernate.annotations
+//                            .Parameter(name = PermitNumberGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d")})
+//    private String permitNumber;
+
     public Member(String firstName,
                   String lastName,
                   LocalDate birthDate,
                   String email,
-                  boolean passedExam,
-                  Gender gender)
+                  Gender gender,
+                  boolean passedExam)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.email = email;
-        this.passedExam = passedExam;
         this.gender = gender;
+        this.passedExam = passedExam;
+    }
+
+    public Member(Member member)
+    {
+        this (member.firstName,
+                member.lastName,
+                member.birthDate,
+                member.email,
+                member.gender,
+                member.passedExam);
     }
 }

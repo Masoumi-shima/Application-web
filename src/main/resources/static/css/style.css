@@ -1,18 +1,98 @@
 .title {
-    background-image: linear-gradient(
-        to right,
-        rgb(0, 66, 114) 0%,
-        rgb(4, 56, 109) 100%
-    );
     font-size: 24px;
     text-align: center;
     color: aliceblue;
     padding: 10px;
 }
 
+table {
+    border-collapse: collapse;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-top: 50px;
+    margin-left: auto ;
+    margin-right: auto ;
+    padding: 10px;
+    border: 1px solid  rgb(35, 36, 37);
+}
+
+.table-head tr {
+    background-color: black;
+    color: aliceblue ;
+    text-align: left;
+}
+
+.table-style th,
+.table-style td {
+    padding: 12px 15px;
+}
+
+.table-style tbody tr {
+    border-bottom: 1px solid aliceblue;
+}
+
+.table-style tbody tr:nth-of-type(even) {
+    background-color: #242424;
+}
+
+.table-style tbody tr:last-of-type {
+    border-bottom: 2px solid #050505;
+}
+
+.table-style tbody tr.active-row {
+    font-weight: bold;
+    color: #36373d;
+}
+
+a {
+    text-decoration: none ;
+    color: aliceblue ;
+}
+.add {
+    font-size: 17px;
+    color: aliceblue;
+    padding: 10px;
+    background: rgb(0, 128, 240);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.edit {
+    font-size: 17px;
+    color: white;
+    padding: 10px;
+    background: rgb(0, 128, 240);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.delete {
+    font-size: 17px;
+    color: white;
+    padding: 10px;
+    background: darkred;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
 body {
     margin: 0px;
     font-family: "Lato", sans-serif;
+    background-image: linear-gradient(
+            to right,
+            rgb(0, 0, 0) 0%,
+            rgb(50, 53, 56) 100%
+    );
+    color: aliceblue
 }
 
 form {
@@ -59,7 +139,7 @@ p {
 hr {
     border: none;
     height: 1px;
-    background-color: rgb(4, 56, 109);
+    background-color: aliceblue;
     margin-bottom: 10px;
     margin-top: 20px;
 }
@@ -81,12 +161,13 @@ input.invalid {
 button {
     font-size: 17px;
     padding: 10px;
-    background: none;
-    border: 1px solid rgb(4, 56, 109);
+    background: rgb(0, 128, 240);
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 10px;
     margin: 10px;
     transition: all 0.5s;
     cursor: pointer;
+    color: aliceblue
 }
 
 button:hover {
@@ -95,17 +176,31 @@ button:hover {
 }
 
 .success-msg {
-    background-image: linear-gradient(
-            to right,
-            rgb(128, 171, 203) 0%,
-            rgb(60, 94, 128) 100%
-    );
+    display: block ;
+    width: 50%;
     font-size: 20px;
-    margin: 20px;
+    margin: 100px auto auto;
     padding: 20px;
     text-align: center;
+    color: aliceblue ;
 }
 
 .user-info {
     font-weight: lighter;
+}
+
+.back {
+    display: block;
+    color: aliceblue;
+    margin: 30px 20px;
+}
+
+.option {
+    display: block ;
+    margin-top: 10%;
+    font-size: 24px;
+    text-align: center;
+    color: aliceblue;
+    padding: 10px;
+    text-decoration: none ;
 }

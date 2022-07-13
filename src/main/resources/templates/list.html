@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>List</title>
+        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+        <link
+                href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+                rel="stylesheet"
+        />
+    </head>
+    <body>
+    <div>
+        <div class="back">
+            <a th:href="@{/}"><img th:src="@{images/home.png}" src="../static/images/home.png" alt="Page d'acceuil" width="70" height="70"></a>
+        </div>
+        <div class="title">
+            <h1>Liste des membres</h1>
+            </hr>
+            <button class="add"><a th:href="@{/ajouter-membre}">Ajouter un membre</a></button>
+        </div>
+        <table class="table-style" id="membersTable">
+            <thead class="table-head">
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Date de naissance</th>
+                <th>Adresse courriel</th>
+                <th>Genre</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="member:${members}">
+                <td th:text="${member.firstName}"></td>
+                <td th:text="${member.lastName}"></td>
+                <td th:text="${member.birthDate}"></td>
+                <td th:text="${member.email}"></td>
+                <td th:text="${member.gender}"></td>
+
+                <td>
+                    <button class="edit"><a th:href="@{/modifier-membre(id=${member.id})}">Modifier</a></button>
+                    <button class="delete"><a th:href="@{/deleteMember(id=${member.id})}">Supprimer</a></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </body>
+</html>

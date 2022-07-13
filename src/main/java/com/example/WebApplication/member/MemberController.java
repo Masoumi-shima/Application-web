@@ -20,7 +20,12 @@ public class MemberController
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping({ "/"})
+    @GetMapping("/")
+    public ModelAndView loadMainPage()
+    {
+        return new ModelAndView("index");
+    }
+    @GetMapping({ "/ajouter-membre"})
     public ModelAndView loadPage()
     {
         ModelAndView modelAndView = new ModelAndView("form");
@@ -29,7 +34,31 @@ public class MemberController
         return modelAndView;
     }
 
-    @PostMapping("/api/v1/member")
+    @GetMapping("/modifier-membre")
+    public ModelAndView modifyMember(@RequestParam String id)
+    {
+        ModelAndView modelAndView = new ModelAndView("form");
+        Member member = memberRepository.findById(id).get();
+        System.out.println("Gender: " + member.getGender());
+        modelAndView.addObject("member", member);
+        return modelAndView;
+    }
+
+    @GetMapping("/deleteMember")
+    public ModelAndView deleteMember(@RequestParam String id)
+    {
+        memberRepository.deleteById(id);
+        return new ModelAndView("redirect:/liste-membre");
+    }
+    @GetMapping("/liste-membre")
+    public ModelAndView getMembersList()
+    {
+        ModelAndView modelAndView = new ModelAndView("list");
+        modelAndView.addObject("members", memberRepository.findAll());
+        return modelAndView;
+    }
+
+    @PostMapping("/ajouter-membre")
     public ModelAndView submitForm(@Validated @ModelAttribute("member") Member member,BindingResult bindingResult)
     {
         if (bindingResult.hasErrors())
@@ -40,13 +69,17 @@ public class MemberController
         }
         else
         {
+            if (member.getId() != null && member.getId().equals(""))
+            {
+                member = new Member(member);
+            }
             memberService.addNewMember(member);
             String memberId = member.getId();
-            return new ModelAndView("redirect:/api/v1/confirmation?id=" + memberId);
+            return new ModelAndView("redirect:/confirmation?id=" + memberId);
         }
     }
 
-    @GetMapping({"/api/v1/confirmation"})
+    @GetMapping({"/confirmation"})
     public ModelAndView showConfirmation(@RequestParam String id)
     {
         Member member = memberRepository.findById(id).get();
