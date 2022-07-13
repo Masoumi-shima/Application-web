@@ -42,6 +42,7 @@
                 <input type="email" th:field="*{email}" class="" name="email" id="email" placeholder="abc@abc.com">
                 <div class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error></div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
+                <div class="error-hint" th:text="${msg}"></div>
 
                 <div class="radio-box">
                     <p name="gender-selection" id="gender">Genre:</p>

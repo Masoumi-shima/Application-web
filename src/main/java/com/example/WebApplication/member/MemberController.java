@@ -68,6 +68,11 @@ public class MemberController
             modelAndView.addObject("member", member);
             return modelAndView;
         }
+        else if (memberService.isEmailTaken(member))
+        {
+            String msg = "Ce courriel est déjà enregistré.";
+            return new ModelAndView("form", "msg", msg);
+        }
         else
         {
             if (member.getPermitNumber() != null && member.getPermitNumber().equals(""))

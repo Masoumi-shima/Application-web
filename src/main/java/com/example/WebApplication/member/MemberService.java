@@ -19,6 +19,12 @@ public class MemberService
 
     public void addNewMember(Member member)
     {
-        memberRepository.save(member);
+            memberRepository.save(member);
+    }
+
+    public boolean isEmailTaken(Member member)
+    {
+        Optional<Member> optional = memberRepository.findByEmail(member.getEmail());
+        return optional.isPresent();
     }
 }
