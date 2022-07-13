@@ -1,7 +1,10 @@
 package com.example.WebApplication.member;
 
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MemberService
@@ -17,13 +20,5 @@ public class MemberService
     public void addNewMember(Member member)
     {
         memberRepository.save(member);
-        //        TODO: Gérer l'erreur 500 pour la duplication de l'adresse courriel
-//        String membersEmail = member.getEmail();
-//        Optional<Member> findByEmail = memberRepository.findByEmail(member.getEmail());
-//            if (findByEmail.isPresent())
-//            {
-//                throw new RuntimeException
-//                ("Email : Une personne avec cette adresse courriel est déjà enregistrée !");
-//            }
     }
 }

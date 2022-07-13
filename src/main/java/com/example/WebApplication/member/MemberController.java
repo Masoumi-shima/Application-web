@@ -25,6 +25,7 @@ public class MemberController
     {
         return new ModelAndView("index");
     }
+
     @GetMapping({ "/ajouter-membre"})
     public ModelAndView loadPage()
     {
@@ -35,21 +36,21 @@ public class MemberController
     }
 
     @GetMapping("/modifier-membre")
-    public ModelAndView modifyMember(@RequestParam String id)
+    public ModelAndView modifyMember(@RequestParam String permitNumber)
     {
         ModelAndView modelAndView = new ModelAndView("form");
-        Member member = memberRepository.findById(id).get();
-        System.out.println("Gender: " + member.getGender());
+        Member member = memberRepository.findById(permitNumber).get();
         modelAndView.addObject("member", member);
         return modelAndView;
     }
 
     @GetMapping("/deleteMember")
-    public ModelAndView deleteMember(@RequestParam String id)
+    public ModelAndView deleteMember(@RequestParam String permitNumber)
     {
-        memberRepository.deleteById(id);
+        memberRepository.deleteById(permitNumber);
         return new ModelAndView("redirect:/liste-membre");
     }
+
     @GetMapping("/liste-membre")
     public ModelAndView getMembersList()
     {
@@ -69,12 +70,12 @@ public class MemberController
         }
         else
         {
-            if (member.getId() != null && member.getId().equals(""))
+            if (member.getPermitNumber() != null && member.getPermitNumber().equals(""))
             {
                 member = new Member(member);
             }
             memberService.addNewMember(member);
-            String memberId = member.getId();
+            String memberId = member.getPermitNumber();
             return new ModelAndView("redirect:/confirmation?id=" + memberId);
         }
     }

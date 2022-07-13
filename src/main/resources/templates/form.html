@@ -22,7 +22,7 @@
     <div>
         <form th:action="@{/ajouter-membre}" th:object="${member}" id="membershipForm" method="POST">
             <div class="form-box">
-                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{permitNumber}">
                 <label for="firstName">Prénom</label>
                 <input type="text" th:field="*{firstName}" class="" name="firstName" id="firstName" placeholder="Prénom">
                 <div class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error></div>

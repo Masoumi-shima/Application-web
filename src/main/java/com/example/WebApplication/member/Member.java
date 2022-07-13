@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -20,9 +19,18 @@ import java.time.LocalDate;
 public class Member
 {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permit_num_seq")
+    @GenericGenerator(name = "permit_num_seq", strategy = "com.example.WebApplication.member.PermitNumberGenerator",
+            parameters =
+                    {
+                    @org.hibernate.annotations.Parameter
+                            (name = PermitNumberGenerator.INCREMENT_PARAM, value = "50"),
+                    @org.hibernate.annotations.Parameter
+                            (name = PermitNumberGenerator.VALUE_PREFIX_PARAMETER, value = "A"),
+                    @org.hibernate.annotations.Parameter
+                            (name = PermitNumberGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d")
+            })
+    private String permitNumber;
 
     @NotEmpty(message = "Entrez votre prénom.")
     @Column(nullable = false)
@@ -38,9 +46,8 @@ public class Member
     private LocalDate birthDate;
 
     @NotEmpty(message = "Entrez votre adresse courriel.")
-    @Email(message = "L'addresse courriel n'est pas valide.")
+    @Email(message = "L'adresse courriel n'est pas valide.")
     @Column(nullable = false)
-
     private String email;
 
     @Column(nullable = false)
@@ -49,20 +56,6 @@ public class Member
     @EnumValidator(enumClass = Gender.class)
     @Column(nullable = false)
     private Gender gender;
-
-//    @org.springframework.data.annotation.Transient
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permit_number_seq")
-//    @GenericGenerator(
-//            name = "permit_number_seq",
-//            strategy = "com.example.WebApplication.member.PermitNumberGenerator",
-//            parameters = {
-//                    @org.hibernate.annotations
-//                            .Parameter(name = PermitNumberGenerator.INCREMENT_PARAM, value = "50"),
-//                    @org.hibernate.annotations
-//                            .Parameter(name = PermitNumberGenerator.VALUE_PREFIX_PARAMETER, value = "A"),
-//                    @org.hibernate.annotations
-//                            .Parameter(name = PermitNumberGenerator.NUMBER_FORMAT_PARAMETER, value = "%04d")})
-//    private String permitNumber;
 
     public Member(String firstName,
                   String lastName,
