@@ -65,6 +65,7 @@
         <hr />
             <button type="submit" name="submitForm" id="submitForm">Enregistrer</button>
             <button type="reset" name="resetForm" id="resetForm">Réinitialiser</button>
+            <button class="delete" th:classappend="${hideDltBtn} ? hidden"><a th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a></button>
         </form>
     </div>
     <script type="module" th:src="@{/js/script.js}"></script>

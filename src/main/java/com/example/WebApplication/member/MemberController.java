@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 public class MemberController
 {
@@ -32,6 +34,8 @@ public class MemberController
         ModelAndView modelAndView = new ModelAndView("form");
         Member member = new Member();
         modelAndView.addObject("member", member);
+        modelAndView.addObject("hideDltBtn", true);
+
         return modelAndView;
     }
 
@@ -71,7 +75,10 @@ public class MemberController
         else if (memberService.isEmailTaken(member))
         {
             String msg = "Ce courriel est déjà enregistré.";
-            return new ModelAndView("form", "msg", msg);
+            ModelAndView modelAndView = new ModelAndView("form");
+            modelAndView.addObject("msg", msg);
+            modelAndView.addObject("hideDltBtn", true);
+            return modelAndView;
         }
         else
         {
