@@ -7,8 +7,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @RestController
 public class MemberController
 {
@@ -23,43 +21,18 @@ public class MemberController
     }
 
     @GetMapping("/")
-    public ModelAndView loadMainPage()
+    public ModelAndView getMainPage()
     {
         return new ModelAndView("index");
     }
 
     @GetMapping({ "/ajouter-membre"})
-    public ModelAndView loadPage()
+    public ModelAndView getForm()
     {
-        ModelAndView modelAndView = new ModelAndView("form");
         Member member = new Member();
+        ModelAndView modelAndView = new ModelAndView("form");
         modelAndView.addObject("member", member);
         modelAndView.addObject("hideDltBtn", true);
-
-        return modelAndView;
-    }
-
-    @GetMapping("/modifier-membre")
-    public ModelAndView modifyMember(@RequestParam String permitNumber)
-    {
-        ModelAndView modelAndView = new ModelAndView("form");
-        Member member = memberRepository.findById(permitNumber).get();
-        modelAndView.addObject("member", member);
-        return modelAndView;
-    }
-
-    @GetMapping("/deleteMember")
-    public ModelAndView deleteMember(@RequestParam String permitNumber)
-    {
-        memberRepository.deleteById(permitNumber);
-        return new ModelAndView("redirect:/liste-membre");
-    }
-
-    @GetMapping("/liste-membre")
-    public ModelAndView getMembersList()
-    {
-        ModelAndView modelAndView = new ModelAndView("list");
-        modelAndView.addObject("members", memberRepository.findAll());
         return modelAndView;
     }
 
@@ -99,5 +72,29 @@ public class MemberController
         ModelAndView modelAndView = new ModelAndView("confirmation");
         modelAndView.addObject("member", member);
         return modelAndView;
+    }
+
+    @GetMapping("/liste-membre")
+    public ModelAndView getMembersList()
+    {
+        ModelAndView modelAndView = new ModelAndView("list");
+        modelAndView.addObject("members", memberRepository.findAll());
+        return modelAndView;
+    }
+
+    @GetMapping("/modifier-membre")
+    public ModelAndView modifyMember(@RequestParam String permitNumber)
+    {
+        Member member = memberRepository.findById(permitNumber).get();
+        ModelAndView modelAndView = new ModelAndView("form");
+        modelAndView.addObject("member", member);
+        modelAndView.addObject("hideRstBtn", true);
+        return modelAndView;
+    }
+    @GetMapping("/deleteMember")
+    public ModelAndView deleteMember(@RequestParam String permitNumber)
+    {
+        memberRepository.deleteById(permitNumber);
+        return new ModelAndView("redirect:/liste-membre");
     }
 }

@@ -45,17 +45,15 @@
                 <div class="error-hint" th:text="${msg}"></div>
 
                 <div class="radio-box">
-                    <p name="gender-selection" id="gender">Genre:</p>
-                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error></div>
+                    <p name="gender-selection" id="gender">Genre</p>
+                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error>
+                    </div>
                     <div class="error-hint hidden">Choisissez une option.</div>
-                    <input type="radio" name="gender" id="female" value="FEMALE">
-                    <label for="female">Female</label><br>
-                    <input type="radio" name="gender" id="male" value="MALE">
-                    <label for="male">Male</label><br>
-                    <input type="radio" name="gender" id="other" value="OTHER">
-                    <label for="other">Other</label><br>
+                    <div class="gender_values" th:each="genderValue : ${T(com.example.WebApplication.member.Gender).values()}">
+                        <input type="radio" name="gender" th:id="${genderValue}" th:text="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}">
+                        <label th:for="${genderValue}" th:field="${genderValue}"></label><br>
+                    </div>
                 </div>
-
                 <div class="check-box">
                     <input type="checkbox" th:field="*{passedExam}" name="passedExam" id="passedExam" value="true">
                     <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>
@@ -64,7 +62,7 @@
             </div>
         <hr />
             <button type="submit" name="submitForm" id="submitForm">Enregistrer</button>
-            <button type="reset" name="resetForm" id="resetForm">Réinitialiser</button>
+            <button type="reset" name="resetForm" id="resetForm" th:classappend="${hideRstBtn} ? hidden">Réinitialiser</button>
             <button class="delete" th:classappend="${hideDltBtn} ? hidden"><a th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a></button>
         </form>
     </div>
