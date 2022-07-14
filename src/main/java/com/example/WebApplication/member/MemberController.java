@@ -32,7 +32,6 @@ public class MemberController
         Member member = new Member();
         ModelAndView modelAndView = new ModelAndView("form");
         modelAndView.addObject("member", member);
-        modelAndView.addObject("hideDltBtn", true);
         return modelAndView;
     }
 
@@ -50,7 +49,6 @@ public class MemberController
             String msg = "Ce courriel est déjà enregistré.";
             ModelAndView modelAndView = new ModelAndView("form");
             modelAndView.addObject("msg", msg);
-            modelAndView.addObject("hideDltBtn", true);
             return modelAndView;
         }
         else
@@ -88,9 +86,9 @@ public class MemberController
         Member member = memberRepository.findById(permitNumber).get();
         ModelAndView modelAndView = new ModelAndView("form");
         modelAndView.addObject("member", member);
-        modelAndView.addObject("hideRstBtn", true);
         return modelAndView;
     }
+
     @GetMapping("/deleteMember")
     public ModelAndView deleteMember(@RequestParam String permitNumber)
     {
