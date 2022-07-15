@@ -19,10 +19,12 @@ inputs.forEach(input => {
     });
 })
 
-genderFields.addEventListener('change', () => {
+genderFields.forEach(value => {
+    value.addEventListener('change', () => {
         genderField.classList.remove('invalid')
-    genderField.nextElementSibling.classList.add('hidden')
+        genderField.nextElementSibling.classList.add('hidden')
     })
+})
 
 function validateInputs(inputBox)
 {

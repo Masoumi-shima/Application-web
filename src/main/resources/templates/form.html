@@ -62,7 +62,7 @@
             </div>
         <hr />
             <button type="submit" name="submitForm" id="submitForm">Enregistrer</button>
-            <button type="reset" name="resetForm" id="resetForm" th:classappend="*{permitNumber != null} ? hidden">Réinitialiser</button>
+            <button type="reset" name="resetForm" id="resetForm" th:classappend="*{permitNumber != null and permitNumber !=''} ? hidden">Réinitialiser</button>
             <button class="delete" th:classappend="*{permitNumber == null or permitNumber ==''} ? hidden"><a th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a></button>
         </form>
     </div>
