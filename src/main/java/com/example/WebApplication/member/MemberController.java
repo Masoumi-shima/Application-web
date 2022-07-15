@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
 @RestController
 public class MemberController
 {
@@ -38,13 +40,15 @@ public class MemberController
     @PostMapping("/ajouter-membre")
     public ModelAndView submitForm(@Validated @ModelAttribute("member") Member member,BindingResult bindingResult)
     {
+        Optional<Member> existingMember = memberRepository.findByEmail(member.getEmail());
         if (bindingResult.hasErrors())
         {
             ModelAndView modelAndView = new ModelAndView("form", HttpStatus.BAD_REQUEST);
             modelAndView.addObject("member", member);
             return modelAndView;
         }
-        else if (memberService.isEmailTaken(member))
+        else if (memberService.isEmailTaken(member) &&
+                !(existingMember.get().getPermitNumber().equals(member.getPermitNumber())))
         {
             String msg = "Ce courriel est déjà enregistré.";
             ModelAndView modelAndView = new ModelAndView("form");
