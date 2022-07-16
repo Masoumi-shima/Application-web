@@ -1,4 +1,4 @@
-import {form, firstName, lastName, birthDate, email, genderField, genderFields} from "./formData.js"
+import {form, firstName, lastName, birthDate, email, genderFields, genderField} from "./formData.js"
 
 let inputs = [firstName, lastName, birthDate, email]
 let areInputsValid = false
@@ -21,7 +21,8 @@ inputs.forEach(input => {
 
 genderFields.forEach(value => {
     value.addEventListener('change', () => {
-        genderIsSelected()
+        genderField.classList.remove('invalid')
+        genderField.nextElementSibling.classList.add('hidden')
     })
 })
 

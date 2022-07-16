@@ -5,8 +5,8 @@ const birthDate = document.querySelector('input[name= "birthDate"]')
 const email = document.querySelector('input[name= "email"]')
 const genderField = document.getElementById('gender')
 const genderFields = [
-    document.getElementById("female"),
-    document.getElementById("male"),
-    document.getElementById("other")
+    document.getElementById("FEMALE"),
+    document.getElementById("MALE"),
+    document.getElementById("OTHER")
 ]
 export {form, firstName, lastName, birthDate, email, genderField, genderFields}
