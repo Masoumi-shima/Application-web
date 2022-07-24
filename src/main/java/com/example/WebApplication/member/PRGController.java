@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @RestController
-public class MemberController
+public class PRGController
 {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberController(MemberService memberService, MemberRepository memberRepository)
+    public PRGController(MemberService memberService, MemberRepository memberRepository)
     {
         this.memberService = memberService;
         this.memberRepository = memberRepository;

@@ -28,4 +28,17 @@ public class MemberService
         Optional<Member> optional = memberRepository.findByEmail(member.getEmail());
         return optional.isPresent();
     }
+
+    public Member update(String id, Member updatedMember)
+    {
+        Member member = memberRepository.findById(id).get();
+        member.setFirstName(updatedMember.getFirstName());
+        member.setLastName(updatedMember.getLastName());
+        member.setBirthDate(updatedMember.getBirthDate());
+        member.setEmail(updatedMember.getEmail());
+        member.setGender(updatedMember.getGender());
+        member.setPassedExam(updatedMember.isPassedExam());
+        memberRepository.save(member);
+        return member;
+    }
 }
