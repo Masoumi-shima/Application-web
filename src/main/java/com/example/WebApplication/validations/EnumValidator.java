@@ -1,6 +1,7 @@
 package com.example.WebApplication.validations;
 
 import com.example.WebApplication.member.Gender;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;

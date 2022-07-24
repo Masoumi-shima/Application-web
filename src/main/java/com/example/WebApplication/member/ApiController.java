@@ -3,7 +3,7 @@ package com.example.WebApplication.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +28,17 @@ public class ApiController
         return ResponseEntity.ok(members);
     }
 
-    @GetMapping("/api/membres/:{id}")
-    public ResponseEntity<Member> getAMember(@PathVariable("id") String id)
+    @GetMapping("/api/membres/:{permitNumber}")
+    public ResponseEntity<Member> getAMember(@PathVariable("permitNumber") String permitNumber)
     {
-        if (memberRepository.findById(id).isPresent())
+        if (!memberService.isPermitNumberValid(permitNumber))
         {
-            Member member = memberRepository.findById(id).get();
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (memberRepository.findById(permitNumber).isPresent())
+        {
+            Member member = memberRepository.findById(permitNumber).get();
             return ResponseEntity.ok(member);
         }
         else
@@ -42,12 +47,16 @@ public class ApiController
         }
     }
 
-    @PutMapping("/api/membres/:{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable("id") String id, @RequestBody Member updatedMember)
+    @PutMapping("/api/membres/:{permitNumber}")
+    public ResponseEntity<Member> updateMember(@PathVariable("permitNumber") String permitNumber, @RequestBody Member updatedMember)
     {
-        if (memberRepository.findById(id).isPresent())
+        if (!memberService.isPermitNumberValid(permitNumber))
         {
-            Member member = memberService.update(id, updatedMember);
+            return ResponseEntity.badRequest().build();
+        }
+        if (memberRepository.findById(permitNumber).isPresent())
+        {
+            Member member = memberService.update(permitNumber, updatedMember);
             return ResponseEntity.ok(member);
         }
         else
@@ -56,8 +65,28 @@ public class ApiController
         }
     }
 
+    @DeleteMapping("/api/membres/:{permitNumber}")
+    public ResponseEntity<Member> deleteMember(@PathVariable("permitNumber") String permitNumber)
+    {
+        if (!memberService.isPermitNumberValid(permitNumber))
+        {
+            return ResponseEntity.badRequest().build();
+        }
+        if (memberRepository.findById(permitNumber).isPresent())
+        {
+            memberRepository.deleteById(permitNumber);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @ResponseBody
     @PostMapping("/api/membre")
-    public
+    public ResponseEntity<Member> createMember(@Validated @RequestBody Member member)
+    {
+        memberRepository.save(member);
+        return ResponseEntity.ok(member);
+    }
 }
 
 

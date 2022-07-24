@@ -1,11 +1,11 @@
 package com.example.WebApplication.member;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class MemberService
@@ -29,9 +29,9 @@ public class MemberService
         return optional.isPresent();
     }
 
-    public Member update(String id, Member updatedMember)
+    public Member update(String permitNumber, Member updatedMember)
     {
-        Member member = memberRepository.findById(id).get();
+        Member member = memberRepository.findById(permitNumber).get();
         member.setFirstName(updatedMember.getFirstName());
         member.setLastName(updatedMember.getLastName());
         member.setBirthDate(updatedMember.getBirthDate());
@@ -40,5 +40,12 @@ public class MemberService
         member.setPassedExam(updatedMember.isPassedExam());
         memberRepository.save(member);
         return member;
+    }
+
+    public boolean isPermitNumberValid(String permitNumber)
+    {
+        Pattern pattern = Pattern.compile("[A]\\d{4}");
+        Matcher matcher = pattern.matcher(permitNumber);
+        return matcher.matches();
     }
 }
