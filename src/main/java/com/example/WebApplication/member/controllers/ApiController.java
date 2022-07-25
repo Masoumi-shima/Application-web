@@ -36,7 +36,7 @@ public class ApiController
     }
 
     @GetMapping("/api/membres/:{permitNumber}")
-    public ResponseEntity<Member> getAMember(@PathVariable("permitNumber") String permitNumber)
+    public ResponseEntity<Member> findAMember(@PathVariable("permitNumber") String permitNumber)
     {
         if (!memberService.isPermitNumberValid(permitNumber))
         {
@@ -59,14 +59,19 @@ public class ApiController
                                                @Validated  @RequestBody Member updatedMember)
     {
         Optional<Member> existingMember = memberRepository.findById(permitNumber);
+        Optional<Member> memberWithSameEmail = memberRepository.findByEmail(updatedMember.getEmail());
         if (!memberService.isPermitNumberValid(permitNumber))
         {
             return ResponseEntity.badRequest().build();
         }
         if (existingMember.isPresent())
         {
-            Member member = memberService.update(permitNumber ,updatedMember);
-            return ResponseEntity.ok(member);
+            if (!memberWithSameEmail.isPresent()  || existingMember.get().getPermitNumber().equals(memberWithSameEmail.get().getPermitNumber()))
+            {
+                Member member = memberService.update(permitNumber ,updatedMember);
+                return ResponseEntity.ok(member);
+            }
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         else
         {
@@ -119,7 +124,6 @@ public class ApiController
         if (memberService.isEmailTaken(member) &&
             !(existingMember.get().getPermitNumber().equals(member.getPermitNumber())))
     {
-
         return new ResponseEntity<Member>(member,HttpStatus.CONFLICT);
     }
         memberRepository.save(member);
