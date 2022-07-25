@@ -1,5 +1,7 @@
-package com.example.WebApplication.member;
+package com.example.WebApplication.member.service;
 
+import com.example.WebApplication.member.Member;
+import com.example.WebApplication.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;

@@ -1,5 +1,8 @@
-package com.example.WebApplication.member;
+package com.example.WebApplication.member.controllers;
 
+import com.example.WebApplication.member.Member;
+import com.example.WebApplication.member.repository.MemberRepository;
+import com.example.WebApplication.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
