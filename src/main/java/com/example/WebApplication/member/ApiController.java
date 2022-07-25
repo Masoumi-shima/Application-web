@@ -1,11 +1,13 @@
 package com.example.WebApplication.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
@@ -111,6 +113,14 @@ public class ApiController
     @PostMapping("/api/membre")
     public ResponseEntity<Member> createMember(@Validated @RequestBody Member member)
     {
+        Optional<Member> existingMember = memberRepository.findByEmail(member.getEmail());
+
+        if (memberService.isEmailTaken(member) &&
+            !(existingMember.get().getPermitNumber().equals(member.getPermitNumber())))
+    {
+
+        return new ResponseEntity<Member>(member,HttpStatus.CONFLICT);
+    }
         memberRepository.save(member);
         return new ResponseEntity<Member>(member,HttpStatus.CREATED);
     }
