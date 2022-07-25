@@ -2,12 +2,14 @@ package com.example.WebApplication.member.service;
 
 import com.example.WebApplication.member.Member;
 import com.example.WebApplication.member.repository.MemberRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
-import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,22 +49,19 @@ public class MemberService
         return member;
     }
 
-    public Member updateFields(String permitNumber, Member updatedMember, Map<Object, Object> fields)
-    {
-        fields.forEach((key, value) ->
-        {
-            Field field = ReflectionUtils.findField(Member.class, (String) key);
-            field.setAccessible(true);
-            ReflectionUtils.setField(field, updatedMember, value);
-        });
-        memberRepository.save(updatedMember);
-        return updatedMember;
-    }
-
     public boolean isPermitNumberValid(String permitNumber)
     {
         Pattern pattern = Pattern.compile("[A]\\d{4}");
         Matcher matcher = pattern.matcher(permitNumber);
         return matcher.matches();
+    }
+
+    public Member applyPatchToMember(JsonPatch patch, Member member)
+            throws JsonPatchException, JsonProcessingException
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+        JsonNode jsonNode = patch.apply(objectMapper.convertValue(member, JsonNode.class));
+        return objectMapper.treeToValue(jsonNode, Member.class);
     }
 }

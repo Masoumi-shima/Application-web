@@ -3,6 +3,9 @@ package com.example.WebApplication.member.controllers;
 import com.example.WebApplication.member.Member;
 import com.example.WebApplication.member.repository.MemberRepository;
 import com.example.WebApplication.member.service.MemberService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-
 
 @Controller
 public class ApiController
@@ -66,7 +67,7 @@ public class ApiController
         }
         if (existingMember.isPresent())
         {
-            if (!memberWithSameEmail.isPresent()  || existingMember.get().getPermitNumber().equals(memberWithSameEmail.get().getPermitNumber()))
+            if (memberWithSameEmail.isEmpty() || existingMember.get().getPermitNumber().equals(memberWithSameEmail.get().getPermitNumber()))
             {
                 Member member = memberService.update(permitNumber ,updatedMember);
                 return ResponseEntity.ok(member);
@@ -79,20 +80,21 @@ public class ApiController
         }
     }
 
-    @PatchMapping(path = "/api/membres/:{permitNumber}")
+    @PatchMapping(path = "/api/membres/:{permitNumber}", consumes = "application/json-patch+json")
     public ResponseEntity<Member> updateMemberPartially(@PathVariable("permitNumber") String permitNumber,
-                                                        @Validated @RequestBody Map<Object, Object> fields)
+                                                        @Validated @RequestBody JsonPatch patch)
+            throws JsonPatchException, JsonProcessingException
     {
-        Optional<Member> member = memberRepository.findById(permitNumber);
+        Optional<Member> existingMember = memberRepository.findById(permitNumber);
         if (!memberService.isPermitNumberValid(permitNumber))
         {
             return ResponseEntity.badRequest().build();
         }
-        if (member.isPresent())
+        if (existingMember.isPresent())
         {
-            Member updatedMember = memberService.updateFields(permitNumber, member.get(), fields);
+            Member updatedMember = memberService.applyPatchToMember(patch, existingMember.get());
+            memberRepository.save(updatedMember);
             return new ResponseEntity<>(updatedMember, HttpStatus.OK);
-
         }
         else
         {
