@@ -3,15 +3,14 @@ package com.example.WebApplication.member.controllers;
 import com.example.WebApplication.member.Member;
 import com.example.WebApplication.member.repository.MemberRepository;
 import com.example.WebApplication.member.service.MemberService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +54,7 @@ public class ApiController
         }
     }
 
-    @PutMapping("/api/membres/:{permitNumber}")
+    @PutMapping(path = "/api/membres/:{permitNumber}")
     public ResponseEntity<Member> updateMember(@PathVariable("permitNumber") String permitNumber,
                                                @Validated  @RequestBody Member updatedMember)
     {
@@ -67,9 +66,10 @@ public class ApiController
         }
         if (existingMember.isPresent())
         {
-            if (memberWithSameEmail.isEmpty() || existingMember.get().getPermitNumber().equals(memberWithSameEmail.get().getPermitNumber()))
+            if (memberWithSameEmail.isEmpty() ||
+                    existingMember.get().getPermitNumber().equals(memberWithSameEmail.get().getPermitNumber()))
             {
-                Member member = memberService.update(permitNumber ,updatedMember);
+                Member member = memberService.update(permitNumber, updatedMember);
                 return ResponseEntity.ok(member);
             }
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -83,18 +83,24 @@ public class ApiController
     @PatchMapping(path = "/api/membres/:{permitNumber}", consumes = "application/json-patch+json")
     public ResponseEntity<Member> updateMemberPartially(@PathVariable("permitNumber") String permitNumber,
                                                         @Validated @RequestBody JsonPatch patch)
-            throws JsonPatchException, JsonProcessingException
     {
         Optional<Member> existingMember = memberRepository.findById(permitNumber);
+
         if (!memberService.isPermitNumberValid(permitNumber))
         {
             return ResponseEntity.badRequest().build();
         }
         if (existingMember.isPresent())
         {
-            Member updatedMember = memberService.applyPatchToMember(patch, existingMember.get());
-            memberRepository.save(updatedMember);
-            return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+            try
+            {
+                Member updatedMember = memberService.applyPatchToMember(patch, existingMember.get());
+                return new ResponseEntity<>(updatedMember, HttpStatus.OK);
+            }
+            catch (HttpClientErrorException e)
+            {
+               return new ResponseEntity<>(e.getStatusCode());
+            }
         }
         else
         {
@@ -126,7 +132,7 @@ public class ApiController
         if (memberService.isEmailTaken(member) &&
             !(existingMember.get().getPermitNumber().equals(member.getPermitNumber())))
     {
-        return new ResponseEntity<Member>(member,HttpStatus.CONFLICT);
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
         memberRepository.save(member);
         return new ResponseEntity<Member>(member,HttpStatus.CREATED);
