@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -97,7 +98,7 @@ public class ApiController
                 Member updatedMember = memberService.applyPatchToMember(patch, existingMember.get());
                 return new ResponseEntity<>(updatedMember, HttpStatus.OK);
             }
-            catch (HttpClientErrorException e)
+            catch (HttpClientErrorException | HttpServerErrorException.InternalServerError e)
             {
                return new ResponseEntity<>(e.getStatusCode());
             }
