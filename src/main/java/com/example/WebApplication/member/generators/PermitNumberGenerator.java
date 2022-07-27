@@ -1,4 +1,4 @@
-package com.example.WebApplication.member;
+package com.example.WebApplication.member.generators;
 
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;

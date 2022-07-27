@@ -23,37 +23,38 @@
         <form th:action="@{/ajouter-membre}" th:object="${member}" id="membershipForm" method="POST">
             <div class="form-box">
                 <input type="hidden" th:field="*{permitNumber}">
+
                 <label for="firstName">Prénom</label>
                 <input type="text" th:field="*{firstName}" class="" name="firstName" id="firstName" placeholder="Prénom">
-                <div class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error></div>
+                <div class="error-hint" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
 
                 <label for="lastName">Nom</label>
                 <input type="text" th:field="*{lastName}" class="" name="lastName" id="lastName" placeholder="Nom">
-                <div class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error></div>
+                <div class="error-hint" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
 
                 <label for="birthDate">Date de naissance</label>
                 <input type="date" th:field="*{birthDate}" class="" name="birthDate" id="birthDate" placeholder="Date de naissance">
-                <div class="error-hint" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Name Error></div>
+                <div class="error-hint" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Name Error</div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
 
                 <label for="email">Adresse courriel</label>
                 <input type="email" th:field="*{email}" class="" name="email" id="email" placeholder="abc@abc.com">
-                <div class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error></div>
+                <div class="error-hint" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
                 <div class="error-hint" th:text="${msg}"></div>
 
                 <div class="radio-box">
                     <p name="gender-selection" id="gender">Genre</p>
-                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error>
-                    </div>
+                    <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error</div>
                     <div class="error-hint hidden">Choisissez une option.</div>
                     <div class="gender_values" th:each="genderValue : ${T(com.example.WebApplication.member.Gender).values()}">
                         <input type="radio" name="gender" th:id="${genderValue}" th:text="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}">
                         <label th:for="${genderValue}" th:field="${genderValue}"></label><br>
                     </div>
                 </div>
+
                 <div class="check-box">
                     <input type="checkbox" th:field="*{passedExam}" name="passedExam" id="passedExam" value="true">
                     <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>

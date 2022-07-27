@@ -1,5 +1,8 @@
-package com.example.WebApplication.member;
+package com.example.WebApplication.member.controllers;
 
+import com.example.WebApplication.member.Member;
+import com.example.WebApplication.member.repository.MemberRepository;
+import com.example.WebApplication.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -10,13 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Optional;
 
 @RestController
-public class MemberController
+public class PRGController
 {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @Autowired
-    public MemberController(MemberService memberService, MemberRepository memberRepository)
+    public PRGController(MemberService memberService, MemberRepository memberRepository)
     {
         this.memberService = memberService;
         this.memberRepository = memberRepository;

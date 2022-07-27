@@ -1,6 +1,7 @@
 
 package com.example.WebApplication.member;
 
+import com.example.WebApplication.member.generators.PermitNumberGenerator;
 import com.example.WebApplication.validations.EnumValidator;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class Member
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permit_num_seq")
     @GenericGenerator(name = "permit_num_seq",
-            strategy = "com.example.WebApplication.member.PermitNumberGenerator",
+            strategy = "com.example.WebApplication.member.generators.PermitNumberGenerator",
             parameters = {
                     @Parameter
                             (name = PermitNumberGenerator.INCREMENT_PARAM, value = "50"),
