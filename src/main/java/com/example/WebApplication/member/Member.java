@@ -1,4 +1,3 @@
-
 package com.example.WebApplication.member;
 
 import com.example.WebApplication.member.generators.PermitNumberGenerator;
