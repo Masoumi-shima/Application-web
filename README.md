@@ -21,10 +21,9 @@ Ce projet est une application web permettant aux utilisateurs de s'inscrire en u
 
 
 ## Technologies
-[![Spring Boo](src/main/resources/static/images/springboot.png)](https://spring.io/projects/spring-boot)  
-[![Thymeleaf](src/main/resources/static/images/thymeleaf.jpg)](https://www.thymeleaf.org)  
-[![PostgreSQL](src/main/resources/static/images/postgresql.png)](https://www.postgresql.org)  
-
+- [![Spring Boo](src/main/resources/static/images/springboot.png)](https://spring.io/projects/spring-boot)  
+- [![Thymeleaf](src/main/resources/static/images/thymeleaf.jpg)](https://www.thymeleaf.org)  
+- [![PostgreSQL](src/main/resources/static/images/postgresql.png)](https://www.postgresql.org)  
 
 ## Installation
 ### Prérequis
