@@ -2,14 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width">
         <title>List</title>
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
-        <link
-                href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
-                rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
     </head>
     <body>
     <div>
@@ -18,8 +13,8 @@
         </div>
         <div class="title">
             <h1>Liste des membres</h1>
-            </hr>
-            <button class="add"><a th:href="@{/ajouter-membre}">Ajouter un membre</a></button>
+            <hr>
+            <a role="button" class="add" th:href="@{/ajouter-membre}">Ajouter un membre</a>
         </div>
         <table class="table-style" id="membersTable">
             <thead class="table-head">
@@ -41,7 +36,7 @@
                 <td th:text="${member.gender}"></td>
 
                 <td>
-                    <button class="edit"><a th:href="@{/modifier-membre(permitNumber=${member.permitNumber})}">Modifier</a></button>
+                    <a role="button" class="edit" th:href="@{/modifier-membre(permitNumber=${member.permitNumber})}">Modifier</a>
                 </td>
             </tr>
             </tbody>

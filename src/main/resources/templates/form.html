@@ -3,13 +3,8 @@
 <head>
     <title>Formulaire d'enregistrement</title>
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <link
-    href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
-    rel="stylesheet"
-  />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width">
 
 </head>
 <body>
@@ -35,7 +30,7 @@
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
 
                 <label for="birthDate">Date de naissance</label>
-                <input type="date" th:field="*{birthDate}" class="" name="birthDate" id="birthDate" placeholder="Date de naissance">
+                <input type="date" th:field="*{birthDate}" class="" name="birthDate" id="birthDate">
                 <div class="error-hint" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">Name Error</div>
                 <div class="error-hint hidden">Ce champs est obligatoire.</div>
 
@@ -51,7 +46,7 @@
                     <div class="error-hint hidden">Choisissez une option.</div>
                     <div class="gender_values" th:each="genderValue : ${T(com.example.WebApplication.member.Gender).values()}">
                         <input type="radio" name="gender" th:id="${genderValue}" th:text="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}">
-                        <label th:for="${genderValue}" th:field="${genderValue}"></label><br>
+                        <label th:for="${genderValue}" th:field="${genderValue}"></label>
                     </div>
                 </div>
 
@@ -64,7 +59,7 @@
         <hr />
             <button type="submit" name="submitForm" id="submitForm">Enregistrer</button>
             <button type="reset" name="resetForm" id="resetForm" th:classappend="*{permitNumber != null and permitNumber !=''} ? hidden">Réinitialiser</button>
-            <button class="delete" th:classappend="*{permitNumber == null or permitNumber ==''} ? hidden"><a th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a></button>
+            <a role="button" class="delete" th:classappend="*{permitNumber == null or permitNumber ==''} ? hidden" th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a>
         </form>
     </div>
     <script type="module" th:src="@{/js/script.js}"></script>
