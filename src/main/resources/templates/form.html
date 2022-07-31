@@ -41,12 +41,12 @@
                 <div class="error-hint" th:text="${msg}"></div>
 
                 <div class="radio-box">
-                    <p name="gender-selection" id="gender">Genre</p>
+                    <p id="gender">Genre</p>
                     <div class="error-hint" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error</div>
                     <div class="error-hint hidden">Choisissez une option.</div>
                     <div class="gender_values" th:each="genderValue : ${T(com.example.WebApplication.member.Gender).values()}">
-                        <input type="radio" name="gender" th:id="${genderValue}" th:text="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}">
-                        <label th:for="${genderValue}" th:field="${genderValue}"></label>
+                        <input type="radio" name="gender" th:id="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}"/>
+                        <label th:for="${genderValue}" th:text="${genderValue}"></label>
                     </div>
                 </div>
 
