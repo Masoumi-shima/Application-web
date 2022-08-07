@@ -1,14 +1,17 @@
 <template>
-  <list />
+  <MembersList />
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <script>
-import List from '@/components/List'
+import MembersList from './views/MembersList'
 
 export default {
   name: 'App',
   components: {
-    List
+    MembersList
   },
   methods: {
   }

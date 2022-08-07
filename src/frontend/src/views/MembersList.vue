@@ -1,4 +1,5 @@
 <template>
+  <router-link to="/">Accueil</router-link>
   <table class="table-style">
     <thead class="table-head">
     <tr>
@@ -10,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for = "member in members" :key="member.permitNumber">
+    <tr v-for = "member in members" :key="member.permitNumber" @click="getAMember(member.permitNumber)">
       <td> {{member.firstName}} </td>
       <td> {{member.lastName}}</td>
       <td> {{member.birthDate}}</td>
@@ -25,7 +26,7 @@
 import MemberService from '../services/MemberService'
 
   export default {
-    name: 'List',
+    name: 'MembersList',
     data() {
       return {
         members: []
@@ -37,6 +38,14 @@ import MemberService from '../services/MemberService'
             .then((response) => {
               this.members = response.data
             })
+      },
+      getAMember(permitNumber)
+      {
+        this.$router.push({path: '/membre'})
+        MemberService.getAMember(permitNumber)
+            .then((response) => {
+              this.member = response.data
+            })
       }
     },
     created() {
@@ -45,7 +54,7 @@ import MemberService from '../services/MemberService'
   }
 </script>
 
-<style>
+<style scoped>
 table {
   border-collapse: collapse;
   min-width: 200px;
