@@ -14,6 +14,7 @@
 - [Usage](#usage)
     * [PRG](#prg)
     * [REST API](#rest-api)
+    * [Application Vue](#application-vue)
 - [Sources](#sources)
 
 ## Description
@@ -23,7 +24,8 @@ Ce projet est une application web permettant aux utilisateurs de s'inscrire en u
 ## Technologies
 - [![Spring Boo](src/main/resources/static/images/springboot.png)](https://spring.io/projects/spring-boot)  
 - [![Thymeleaf](src/main/resources/static/images/thymeleaf.jpg)](https://www.thymeleaf.org)  
-- [![PostgreSQL](src/main/resources/static/images/postgresql.png)](https://www.postgresql.org)  
+- [![PostgreSQL](src/main/resources/static/images/postgresql.png)](https://www.postgresql.org)
+- [![Vue.js](src/main/resources/static/images/vue.png)](https://vuejs.org)
 
 ## Installation
 ### Prérequis
@@ -64,6 +66,12 @@ Cette classe est responsable de la création d'un ID pour chaque objet de la bas
 Montez et exécutez le projet en suivant les instructions de ce document. Allez sur l'hôte local et travaillez avec l'application en action.
 ### REST API
 Ce service peut être vu en action en utilisant un client REST comme Postman ou YARC!. Le corps de la requête doit être au format Json. Vérifiez l'adresse fournie dans les méthodes de la classe _ApiController_ pour chaque action.
+### Application Vue 
+Démarrez le serveur et dans le Terminal, allez dans le répertoire « frontend » et executez la commande suivate :
+
+`npm run serve`
+
+Allez sur http://localhost:8081 afin de voir l'application en exécusion.
 ## Sources
 - Images :  
 > https://google.com
