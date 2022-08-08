@@ -1,5 +1,4 @@
 <template>
-  <router-link to="/">Accueil</router-link>
   <table class="table-style">
     <thead class="table-head">
     <tr>
@@ -8,15 +7,17 @@
       <th>Date de naissance</th>
       <th>Adresse courriel</th>
       <th>Genre</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr v-for = "member in members" :key="member.permitNumber" @click="getAMember(member.permitNumber)">
+    <tr v-for = "member in members" :key="member.permitNumber">
       <td> {{member.firstName}} </td>
       <td> {{member.lastName}}</td>
       <td> {{member.birthDate}}</td>
       <td> {{member.email}}</td>
       <td> {{member.gender}}</td>
+      <td><a :href="'/membre/' + member.permitNumber">Voir</a></td>
     </tr>
     </tbody>
   </table>
@@ -37,14 +38,6 @@ import MemberService from '../services/MemberService'
         MemberService.getMembers()
             .then((response) => {
               this.members = response.data
-            })
-      },
-      getAMember(permitNumber)
-      {
-        this.$router.push({path: '/membre'})
-        MemberService.getAMember(permitNumber)
-            .then((response) => {
-              this.member = response.data
             })
       }
     },

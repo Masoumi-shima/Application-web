@@ -1,13 +1,18 @@
 <template>
-  <MembersList />
+  <div class="back">
+    <router-link to="/">
+      <img src="../../main/resources/static/images/home.png" alt="Page d'acceuil" width="70" height="70">
+    </router-link>
+  </div>
+  <MembersList/>
   <div>
     <router-view />
   </div>
 </template>
 
 <script>
-import MembersList from './views/MembersList'
 
+import MembersList from "@/views/MembersList";
 export default {
   name: 'App',
   components: {
@@ -19,16 +24,9 @@ export default {
 </script>
 
 <style>
-.title {
-  font-size: 24px;
-  text-align: center;
-  color: aliceblue;
-  padding: 10px;
-}
 
-body, .gender_values {
+body {
   font-size: 15px;
-  margin: 0px;
   font-family: "Lato", sans-serif;
   background-image: linear-gradient(
       to right,
@@ -41,6 +39,12 @@ body, .gender_values {
 a {
   text-decoration: none ;
   color: aliceblue ;
+}
+
+.back {
+  display: block;
+  color: aliceblue;
+  margin: 20px;
 }
 
 </style>

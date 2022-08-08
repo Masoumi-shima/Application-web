@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import MemberDetails from '../views/MermberDetails'
 const routes = [
     {
-        path: '/membre',
+        path: '/membre/:id',
         name: 'Membre',
-        component: MemberDetails,
+        component: () => import('../components/MemberDetails')
     }
 ];
 

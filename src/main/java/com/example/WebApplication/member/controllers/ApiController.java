@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@CrossOrigin("http://localhost:8081/")
+@CrossOrigin("http://localhost:8081")
 public class ApiController
 {
     private final MemberRepository memberRepository;
