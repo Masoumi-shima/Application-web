@@ -35,6 +35,10 @@ export default {
   },
   created() {
     this.getMember(this.$route.params.id)
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.getMember(to.params.id)
+    next()
   }
 }
 </script>
