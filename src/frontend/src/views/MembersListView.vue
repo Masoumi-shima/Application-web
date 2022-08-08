@@ -11,12 +11,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr v-for = "member in members" :key="member.permitNumber">
-      <td> {{member.firstName}} </td>
-      <td> {{member.lastName}}</td>
-      <td> {{member.birthDate}}</td>
-      <td> {{member.email}}</td>
-      <td> {{member.gender}}</td>
+    <tr v-for="member in members" :key="member.permitNumber">
+      <td>{{member.firstName}}</td>
+      <td>{{member.lastName}}</td>
+      <td>{{member.birthDate}}</td>
+      <td>{{member.email}}</td>
+      <td>{{member.gender}}</td>
       <td><a :href="'/membre/' + member.permitNumber">Voir</a></td>
     </tr>
     </tbody>
@@ -26,25 +26,25 @@
 <script>
 import MemberService from '../services/MemberService'
 
-  export default {
-    name: 'MembersList',
-    data() {
-      return {
-        members: []
-      }
-    },
-    methods: {
-      getMembers() {
-        MemberService.getMembers()
-            .then((response) => {
-              this.members = response.data
-            })
-      }
-    },
-    created() {
-      this.getMembers()
+export default {
+  name: 'MembersList',
+  data() {
+    return {
+      members: []
     }
+  },
+  methods: {
+    getMembers() {
+      MemberService.getMembers()
+          .then((response) => {
+            this.members = response.data
+          })
+    }
+  },
+  created() {
+    this.getMembers()
   }
+}
 </script>
 
 <style scoped>

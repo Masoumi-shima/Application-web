@@ -7,9 +7,8 @@
     <p>Date de naissance : {{currentMember.birthDate}}</p>
     <p>Adresse Courriel : {{currentMember.email}}</p>
     <p>Genre : {{currentMember.gender}}</p>
-    <p>A réussi l'examen : {{currentMember.passedExam}} </p>
+    <p>A réussi l'examen : {{currentMember.passedExam}}</p>
   </div>
-
 </template>
 
 <script>
@@ -39,10 +38,10 @@ export default {
   }
 }
 </script>
+
 <style>
 .details {
   float: left;
   margin: 50px;
 }
-
 </style>

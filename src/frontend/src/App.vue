@@ -8,19 +8,17 @@
 <script>
 import HomeLogo from "@/components/HomeLogo";
 import MembersList from "@/views/MembersListView";
+
 export default {
   name: 'App',
   components: {
     MembersList,
     HomeLogo
-  },
-  methods: {
   }
 }
 </script>
 
 <style>
-
 body {
   font-size: 15px;
   font-family: "Lato", sans-serif;
@@ -36,5 +34,4 @@ a {
   text-decoration: none ;
   color: aliceblue ;
 }
-
 </style>
