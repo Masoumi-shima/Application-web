@@ -52,9 +52,9 @@ table {
   border-collapse: collapse;
   min-width: 200px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  float: left;
   margin-top: 50px;
   margin-left: 2px;
-  margin-right: auto ;
   padding: 10px;
   border: 1px solid  rgb(35, 36, 37);
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="details" v-if="currentMember">
-    <h1>Membre</h1>
+    <h1>{{currentMember.firstName}} {{currentMember.lastName}}</h1>
     <p>Prénom : {{currentMember.firstName}}</p>
     <p>Nom : {{currentMember.lastName}}</p>
     <p>Date de naissance : {{currentMember.birthDate}}</p>
@@ -37,13 +37,8 @@ export default {
 </script>
 <style>
 .details {
-    margin-right: 0;
-    alignment: center;
-  }
-
-h1 {
-    margin-right: 0;
-    align-content: center;
-  }
+  float: left;
+  margin: 50px;
+}
 
 </style>
