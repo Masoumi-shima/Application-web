@@ -1,4 +1,5 @@
 <template>
+  <MembersListView />
   <div class="details" v-if="currentMember">
     <h1>{{currentMember.firstName}} {{currentMember.lastName}}</h1>
     <p>Prénom : {{currentMember.firstName}}</p>
@@ -12,11 +13,14 @@
 </template>
 
 <script>
-
+import MembersListView from "@/views/MembersListView";
 import MemberService from "@/services/MemberService";
 
 export default {
   name: 'MemberDetails',
+  components: {
+    MembersListView
+  },
   data() {
     return {
       currentMember: null

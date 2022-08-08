@@ -1,22 +1,18 @@
 <template>
-  <div class="back">
-    <router-link to="/">
-      <img src="../../main/resources/static/images/home.png" alt="Page d'acceuil" width="70" height="70">
-    </router-link>
-  </div>
-  <MembersList/>
+  <HomeLogo />
   <div>
     <router-view />
   </div>
 </template>
 
 <script>
-
-import MembersList from "@/views/MembersList";
+import HomeLogo from "@/components/HomeLogo";
+import MembersList from "@/views/MembersListView";
 export default {
   name: 'App',
   components: {
-    MembersList
+    MembersList,
+    HomeLogo
   },
   methods: {
   }
@@ -39,12 +35,6 @@ body {
 a {
   text-decoration: none ;
   color: aliceblue ;
-}
-
-.back {
-  display: block;
-  color: aliceblue;
-  margin: 20px;
 }
 
 </style>
