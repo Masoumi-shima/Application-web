@@ -9,18 +9,21 @@ const routes = [
     {
         path: '/membres',
         name: 'MembersList',
-        component: () => import('@/views/MembersListView')
+        component: () => import('@/views/MembersListView'),
+        children: [
+            {
+        path: '/membre/:id',
+        name: 'Membre',
+        component: () => import('@/components/MemberDetails')
+        }
+        ]
     },
     {
         path: '/ajouterMembre/:id?',
         name: 'Ajouter membre',
         component: () => import('@/components/Form')
     },
-    {
-        path: '/membre/:id',
-        name: 'Membre',
-        component: () => import('@/components/MemberDetails')
-    },
+
     {
         path: '/confirmation/:id',
         name: 'Confirmation',

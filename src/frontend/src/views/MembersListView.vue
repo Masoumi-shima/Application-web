@@ -21,10 +21,12 @@
     </tr>
     </tbody>
   </table>
+  <MemberDetails />
 </template>
 
 <script>
 import MemberService from '../services/MemberService'
+import MemberDetails from '@/components/MemberDetails'
 
 export default {
   name: 'MembersList',
@@ -32,6 +34,9 @@ export default {
     return {
       members: []
     }
+  },
+  components: {
+    MemberDetails
   },
   methods: {
     getMembers() {

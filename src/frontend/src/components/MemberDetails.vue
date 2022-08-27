@@ -1,5 +1,4 @@
 <template>
-  <MembersListView />
   <div class="details" v-if="currentMember">
     <h1>{{currentMember.firstName}} {{currentMember.lastName}}</h1>
     <p>Prénom : {{currentMember.firstName}}</p>
