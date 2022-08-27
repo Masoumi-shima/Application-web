@@ -11,14 +11,10 @@
 </template>
 
 <script>
-import MembersListView from "@/views/MembersListView";
 import MemberService from "@/services/MemberService";
 
 export default {
   name: 'MemberDetails',
-  components: {
-    MembersListView
-  },
   data() {
     return {
       currentMember: null

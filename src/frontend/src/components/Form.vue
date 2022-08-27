@@ -54,7 +54,7 @@ import MemberService from "@/services/MemberService";
       }
     },
     methods: {
-      submitForm() {
+      async submitForm() {
         const newMember = {
           firstName: this.member.firstName,
           lastName: this.member.lastName,
@@ -63,9 +63,8 @@ import MemberService from "@/services/MemberService";
           gender: this.member.gender,
           passedExam: this.member.passedExam
         }
-        MemberService.createMember(newMember)
-        const redirectPath = '/confirmation/:id'
-        this.$router.push(redirectPath)
+        await MemberService.createMember(newMember)
+            .then(r => this.$router.push('/confirmation/' + r.data.permitNumber))
       }
     }
   }
