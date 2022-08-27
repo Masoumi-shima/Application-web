@@ -64,7 +64,7 @@ import MemberService from "@/services/MemberService";
           passedExam: this.member.passedExam
         }
         await MemberService.createMember(newMember)
-            .then(r => this.$router.push('/confirmation/' + r.data.permitNumber))
+            .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
       }
     }
   }
