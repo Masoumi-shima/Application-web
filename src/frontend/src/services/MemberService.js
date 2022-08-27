@@ -8,6 +8,10 @@ class MemberService {
     getAMember(permitNumber) {
         return http.get(`/membres/:${permitNumber}`)
     }
+
+    createMember(member) {
+        return http.post('/membre', member)
+    }
 }
 
 export default new MemberService()
