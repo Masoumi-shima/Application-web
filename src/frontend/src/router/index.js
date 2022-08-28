@@ -12,7 +12,7 @@ const routes = [
         component: () => import('@/views/MembersListView'),
         children: [
             {
-        path: '/membre/:id',
+        path: '/membres/:id',
         name: 'Membre',
         component: () => import('@/components/MemberDetails')
         }

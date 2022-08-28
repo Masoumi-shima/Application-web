@@ -29,10 +29,17 @@ export default {
           .then((response) => {
             this.currentMember = response.data
           })
+          .catch(e => {
+            console.log(e)
+          })
     },
     async deleteMember(permitNumber) {
       await MemberService.deleteMember(permitNumber)
+          .catch(e => {
+            console.log(e)
+          })
       this.$router.back()
+
     }
   },
   created() {

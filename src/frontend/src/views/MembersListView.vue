@@ -17,11 +17,11 @@
       <td>{{member.birthDate}}</td>
       <td>{{member.email}}</td>
       <td>{{member.gender}}</td>
-      <td><router-link :to="'/membre/' + member.permitNumber">Voir</router-link></td>
+      <td><router-link :to="'/membres/' + member.permitNumber">Voir</router-link></td>
     </tr>
     </tbody>
   </table>
-  <MemberDetails />
+  <MemberDetails v-if="this.$route.params.id != null" />
 </template>
 
 <script>
