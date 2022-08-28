@@ -8,6 +8,9 @@
     <p>Genre : {{currentMember.gender}}</p>
     <p>A réussi l'examen : {{currentMember.passedExam}}</p>
     <Button class="delete" title="Supprimer" @click="deleteMember(this.$route.params.id)"></Button>
+    <router-link :to="'/membres/modifier/' + this.$route.params.id">
+      <Button class="edit" title="Modifier" />
+    </router-link>
   </div>
 </template>
 
@@ -63,6 +66,18 @@ export default {
   color: white;
   padding: 10px;
   background: darkred;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  margin: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.edit {
+  font-size: 17px;
+  color: white;
+  padding: 10px;
+  background: rgb(0, 128, 240);
   border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   margin: 10px;

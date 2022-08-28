@@ -18,8 +18,7 @@
       <td>{{member.email}}</td>
       <td>{{member.gender}}</td>
       <td>
-        <router-link :to="'/membres/' + member.permitNumber">Voir </router-link>
-        <router-link :to="'/membres/modifier/' + member.permitNumber">Modifier</router-link>
+        <router-link :to="'/membres/' + member.permitNumber">Voir</router-link>
       </td>
     </tr>
     </tbody>
@@ -30,6 +29,7 @@
 <script>
 import MemberService from '../services/MemberService'
 import MemberDetails from '@/components/MemberDetails'
+import Button from "@/components/Button";
 
 export default {
   name: 'MembersList',
@@ -39,6 +39,7 @@ export default {
     }
   },
   components: {
+    Button,
     MemberDetails
   },
   methods: {
