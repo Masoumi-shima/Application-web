@@ -26,8 +26,13 @@ const routes = [
 
     {
         path: '/membre/:id/confirmation',
-        name: 'ConfirmationMembre',
+        name: 'Confirmation',
         component: () => import('@/views/RegistrationConfirmation')
+    },
+    {
+        path: '/membres/modifier/:id',
+        name: 'Modifier',
+        component: () => import('@/views/EditMember')
     }
 ];
 

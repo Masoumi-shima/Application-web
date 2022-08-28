@@ -43,19 +43,16 @@ import Button from '@/components/Button'
     components: {Button},
     data() {
       return {
+        //TODO: Get the gender values from the backend instead of hardcoding them
         genders: ["MALE", "FEMALE", "OTHER"],
-        member: {
-          id: null,
-          firstName: '',
-          lastName: '',
-          birthDate: '',
-          email: '',
-          gender: null,
-          passedExam: false,
-        }
+        member: Object
       }
     },
     methods: {
+      async getMember(permitNumber) {
+        await MemberService.getAMember(permitNumber)
+            .then((response) => this.member = response.data)
+      },
       async submitForm() {
         const newMember = {
           firstName: this.member.firstName,
@@ -67,6 +64,11 @@ import Button from '@/components/Button'
         }
         await MemberService.createMember(newMember)
             .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+      }
+    },
+    created() {
+      if(this.$route.params.id != null) {
+        this.getMember(this.$route.params.id)
       }
     }
   }

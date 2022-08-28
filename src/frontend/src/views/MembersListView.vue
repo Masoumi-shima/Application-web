@@ -17,7 +17,10 @@
       <td>{{member.birthDate}}</td>
       <td>{{member.email}}</td>
       <td>{{member.gender}}</td>
-      <td><router-link :to="'/membres/' + member.permitNumber">Voir</router-link></td>
+      <td>
+        <router-link :to="'/membres/' + member.permitNumber">Voir </router-link>
+        <router-link :to="'/membres/modifier/' + member.permitNumber">Modifier</router-link>
+      </td>
     </tr>
     </tbody>
   </table>
