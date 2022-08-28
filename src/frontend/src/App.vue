@@ -1,19 +1,19 @@
 <template>
   <HomeLogo />
   <div>
-    <router-view />
+    <router-view :key="$route.path"/>
   </div>
 </template>
 
 <script>
 import HomeLogo from "@/components/HomeLogo";
-import MembersList from "@/views/MembersListView";
+import Homepage from '@/views/Homepage'
 
 export default {
   name: 'App',
   components: {
-    MembersList,
-    HomeLogo
+    HomeLogo,
+    Homepage
   }
 }
 </script>

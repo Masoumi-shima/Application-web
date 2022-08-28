@@ -3,13 +3,36 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
     {
         path: '/',
-        name: 'MembersList',
-        component: () => import('../views/MembersListView')
+        name: 'Homepage',
+        component: () => import('@/views/Homepage')
     },
     {
-        path: '/membre/:id',
+        path: '/membres',
+        name: 'MembersList',
+        component: () => import('@/views/MembersListView'),
+        children: [
+            {
+        path: '/membres/:id',
         name: 'Membre',
-        component: () => import('../components/MemberDetails')
+        component: () => import('@/components/MemberDetails')
+        }
+        ]
+    },
+    {
+        path: '/ajouterMembre/:id?',
+        name: 'Ajouter membre',
+        component: () => import('@/components/Form')
+    },
+
+    {
+        path: '/membre/:id/confirmation',
+        name: 'Confirmation',
+        component: () => import('@/views/RegistrationConfirmation')
+    },
+    {
+        path: '/membres/modifier/:id',
+        name: 'Modifier',
+        component: () => import('@/views/EditMember')
     }
 ];
 
