@@ -29,16 +29,18 @@
         <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>
       </div>
 
-      <button type="submit">Enregistrer</button>
-      <button type="reset">Réinitialiser</button>
+      <Button type="submit" title="Enregistrer" />
+      <Button type="reset" title="Réinitialiser" />
 
     </form>
   </section>
 </template>
 
 <script>
-import MemberService from "@/services/MemberService";
+import MemberService from '@/services/MemberService'
+import Button from '@/components/Button'
   export default {
+    components: {Button},
     data() {
       return {
         genders: ["MALE", "FEMALE", "OTHER"],
