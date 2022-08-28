@@ -7,7 +7,7 @@
     <p>Adresse Courriel : {{currentMember.email}}</p>
     <p>Genre : {{currentMember.gender}}</p>
     <p>A réussi l'examen : {{currentMember.passedExam}}</p>
-    <Button class="delete" title="Supprimer"></Button>
+    <Button class="delete" title="Supprimer" @click="deleteMember(this.$route.params.id)"></Button>
   </div>
 </template>
 
@@ -24,11 +24,15 @@ export default {
     }
   },
   methods: {
-    getMember(permitNumber) {
-      MemberService.getAMember(permitNumber)
+    async getMember(permitNumber) {
+      await MemberService.getAMember(permitNumber)
           .then((response) => {
             this.currentMember = response.data
           })
+    },
+    async deleteMember(permitNumber) {
+      await MemberService.deleteMember(permitNumber)
+      this.$router.back()
     }
   },
   created() {

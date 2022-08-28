@@ -39,10 +39,13 @@ export default {
     MemberDetails
   },
   methods: {
-    getMembers() {
-      MemberService.getMembers()
+    async getMembers() {
+      await MemberService.getMembers()
           .then((response) => {
             this.members = response.data
+          })
+          .catch(e => {
+            alert(e)
           })
     }
   },
