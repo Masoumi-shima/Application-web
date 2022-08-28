@@ -65,7 +65,7 @@ import Button from '@/components/Button'
           gender: this.member.gender,
           passedExam: this.member.passedExam
         }
-        if(this.$route.params.id === null) {
+        if(this.$route.params.id === '') {
           await MemberService.createMember(newMember)
               .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
               .catch(e => {
@@ -83,7 +83,7 @@ import Button from '@/components/Button'
 
     },
     created() {
-      if(this.$route.params.id != null) {
+      if(this.$route.params.id !== '') {
         this.getMember(this.$route.params.id)
       }
     }
