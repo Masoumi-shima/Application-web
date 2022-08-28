@@ -16,6 +16,10 @@ class MemberService {
     deleteMember(permitNumber) {
         return http.delete(`/membres/:${permitNumber}`)
     }
+
+    updateMember(permitNumber, member) {
+        return http.put(`/membres/:${permitNumber}`, member)
+    }
 }
 
 export default new MemberService()

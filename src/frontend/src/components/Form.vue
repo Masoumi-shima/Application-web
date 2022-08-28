@@ -52,6 +52,9 @@ import Button from '@/components/Button'
       async getMember(permitNumber) {
         await MemberService.getAMember(permitNumber)
             .then((response) => this.member = response.data)
+            .catch(e => {
+              console.log(e)
+            })
       },
       async submitForm() {
         const newMember = {
@@ -62,9 +65,22 @@ import Button from '@/components/Button'
           gender: this.member.gender,
           passedExam: this.member.passedExam
         }
-        await MemberService.createMember(newMember)
-            .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+        if(this.$route.params.id === null) {
+          await MemberService.createMember(newMember)
+              .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+              .catch(e => {
+                console.log(e)
+              })
+        }
+        else {
+          await MemberService.updateMember(this.$route.params.id, newMember)
+              .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+              .catch(e => {
+                console.log(e)
+              })
+        }
       }
+
     },
     created() {
       if(this.$route.params.id != null) {
