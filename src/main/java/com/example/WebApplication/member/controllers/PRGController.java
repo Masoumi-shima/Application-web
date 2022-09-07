@@ -35,7 +35,7 @@ public class PRGController
     public ModelAndView getForm()
     {
         Member member = new Member();
-        ModelAndView modelAndView = new ModelAndView("formB");
+        ModelAndView modelAndView = new ModelAndView("form");
         modelAndView.addObject("member", member);
         return modelAndView;
     }
