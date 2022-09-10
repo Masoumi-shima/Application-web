@@ -35,7 +35,7 @@ public class PRGController
     public ModelAndView getForm()
     {
         Member member = new Member();
-        ModelAndView modelAndView = new ModelAndView("form");
+        ModelAndView modelAndView = new ModelAndView("formB");
         modelAndView.addObject("member", member);
         return modelAndView;
     }
@@ -46,7 +46,7 @@ public class PRGController
         Optional<Member> existingMember = memberRepository.findByEmail(member.getEmail());
         if (bindingResult.hasErrors())
         {
-            ModelAndView modelAndView = new ModelAndView("form", HttpStatus.BAD_REQUEST);
+            ModelAndView modelAndView = new ModelAndView("formB", HttpStatus.BAD_REQUEST);
             modelAndView.addObject("member", member);
             return modelAndView;
         }
@@ -54,7 +54,7 @@ public class PRGController
                 !(existingMember.get().getPermitNumber().equals(member.getPermitNumber())))
         {
             String msg = "Ce courriel est déjà enregistré.";
-            ModelAndView modelAndView = new ModelAndView("form");
+            ModelAndView modelAndView = new ModelAndView("formB");
             modelAndView.addObject("msg", msg);
             return modelAndView;
         }
@@ -82,7 +82,7 @@ public class PRGController
     @GetMapping("/liste-membre")
     public ModelAndView getMembersList()
     {
-        ModelAndView modelAndView = new ModelAndView("list");
+        ModelAndView modelAndView = new ModelAndView("listB");
         modelAndView.addObject("members", memberRepository.findAll());
         return modelAndView;
     }
@@ -91,7 +91,7 @@ public class PRGController
     public ModelAndView modifyMember(@RequestParam String permitNumber)
     {
         Member member = memberRepository.findById(permitNumber).get();
-        ModelAndView modelAndView = new ModelAndView("form");
+        ModelAndView modelAndView = new ModelAndView("formB");
         modelAndView.addObject("member", member);
         return modelAndView;
     }
