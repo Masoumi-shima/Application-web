@@ -10,18 +10,18 @@
     />
     <meta charset="UTF-8">
 </head>
-<header class="bg-dark">
-        <div class="back">
-            <a th:href="@{/}"><img th:src="@{images/home.png}" src="../static/images/home.png" alt="Page d'accueil" width="70" height="70"></a>
+<header>
+        <div class="back mx-5 my-5">
+            <a th:href="@{/}"><img th:src="@{images/home-dark.png}" src="../static/images/home.png" alt="Page d'accueil" width="70" height="70"></a>
         </div>
 </header>
-<body>
-    <div class="container min-vh-100 min-vw-100 d-flex align-items-center justify-content-center">
-        <div class="col-auto">
-            <div class="row p-5 text-center">
+<body class="min-vh-100 min-vw-100 d-flex align-items-center justify-content-center">
+    <div class="container">
+        <div class="col">
+            <div class="row pb-5">
                 <a class="text-decoration-none text-dark fs-2" th:href="@{/ajouter-membre}">Enregistrer un nouveau membre</a>
             </div>
-            <div class="row p-5 text-center">
+            <div class="row p-5">
                 <a class="text-decoration-none text-dark fs-2" th:href="@{/liste-membre}">Voir la liste des membres</a>
             </div>
         </div>

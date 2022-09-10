@@ -28,7 +28,6 @@ genderFields.forEach(value => {
 
 function validateInputs(inputBox)
 {
-    inputBox.classList.remove('invalid')
     inputBox.nextElementSibling.classList.add('hidden')
     areInputsValid = true
 
