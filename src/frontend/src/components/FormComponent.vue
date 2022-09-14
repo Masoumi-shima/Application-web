@@ -31,8 +31,8 @@
         <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>
       </div>
 
-      <Button type="submit" title="Enregistrer" />
-      <Button type="reset" title="Réinitialiser" />
+      <ButtonComponent type="submit" class="btn-primary" title="Enregistrer" />
+      <ButtonComponent type="reset" class="btn-primary" title="Réinitialiser" />
 
     </form>
   </section>
@@ -40,9 +40,9 @@
 
 <script>
 import MemberService from '@/services/MemberService'
-import Button from '@/components/Button'
+import ButtonComponent from "@/components/ButtonComponent";
   export default {
-    components: {Button},
+    components: {ButtonComponent},
     data() {
       return {
         //TODO: Get the gender values from the backend instead of hardcoding them
@@ -148,20 +148,4 @@ p {
   margin-top: 30px;
 }
 
-button {
-  font-size: 17px;
-  padding: 10px;
-  background: rgb(0, 128, 240);
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 10px;
-  margin: 10px;
-  transition: all 0.5s;
-  cursor: pointer;
-  color: aliceblue
-}
-
-button:hover {
-  background-color: rgb(4, 56, 109);
-  color: white;
-}
 </style>

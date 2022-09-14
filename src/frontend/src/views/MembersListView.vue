@@ -1,26 +1,24 @@
 <template>
   <table class="table-style">
     <thead class="table-head">
-    <tr>
       <th>Prénom</th>
       <th>Nom</th>
       <th>Date de naissance</th>
       <th>Adresse courriel</th>
       <th>Genre</th>
       <th>Action</th>
-    </tr>
     </thead>
     <tbody>
-    <tr v-for="member in members" :key="member.permitNumber">
-      <td>{{member.firstName}}</td>
-      <td>{{member.lastName}}</td>
-      <td>{{member.birthDate}}</td>
-      <td>{{member.email}}</td>
-      <td>{{member.gender}}</td>
-      <td>
-        <router-link :to="'/membres/' + member.permitNumber">Voir</router-link>
-      </td>
-    </tr>
+      <tr v-for="member in members" :key="member.permitNumber">
+        <td>{{member.firstName}}</td>
+        <td>{{member.lastName}}</td>
+        <td>{{member.birthDate}}</td>
+        <td>{{member.email}}</td>
+        <td>{{member.gender}}</td>
+        <td>
+          <router-link :to="'/membres/' + member.permitNumber">Voir</router-link>
+        </td>
+      </tr>`
     </tbody>
   </table>
   <MemberDetails v-if="this.$route.params.id != null" />
@@ -29,7 +27,6 @@
 <script>
 import MemberService from '../services/MemberService'
 import MemberDetails from '@/components/MemberDetails'
-import Button from "@/components/Button";
 
 export default {
   name: 'MembersList',
@@ -39,7 +36,6 @@ export default {
     }
   },
   components: {
-    Button,
     MemberDetails
   },
   methods: {

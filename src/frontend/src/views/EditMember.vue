@@ -1,15 +1,15 @@
 <template>
-  <Form />
+  <FormComponent />
 </template>
 
 <script>
-import Form from "@/components/Form";
+import FormComponent from "@/components/FormComponent";
 export default {
   data() {
     return {
       currentMember : null
     }
   },
-  components: {Form},
+  components: {FormComponent},
 }
 </script>

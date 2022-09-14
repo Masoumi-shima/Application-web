@@ -7,20 +7,20 @@
     <p>Adresse Courriel : {{currentMember.email}}</p>
     <p>Genre : {{currentMember.gender}}</p>
     <p>A réussi l'examen : {{currentMember.passedExam}}</p>
-    <Button class="delete" title="Supprimer" @click="deleteMember(this.$route.params.id)"></Button>
+    <ButtonComponent class="btn-danger" title="Supprimer" @click="deleteMember(this.$route.params.id)"></ButtonComponent>
     <router-link :to="'/membres/modifier/' + this.$route.params.id">
-      <Button class="edit" title="Modifier" />
+      <ButtonComponent class="btn-primary" title="Modifier" />
     </router-link>
   </div>
 </template>
 
 <script>
 import MemberService from "@/services/MemberService";
-import Button from "@/components/Button";
+import ButtonComponent from "@/components/ButtonComponent";
 
 export default {
   name: 'MemberDetails',
-  components: {Button},
+  components: {ButtonComponent},
   data() {
     return {
       currentMember: null
