@@ -2,6 +2,8 @@
   <section>
     <form class="form-box" @submit.prevent="submitForm">
 
+<!--      TODO: Form validation-->
+
       <h1>Fomulaire d'enregistrement</h1>
 
       <label for="firstName">Prénom</label>
