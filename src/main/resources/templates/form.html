@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <title>Formulaire d'enregistrement</title>
         <link
@@ -10,12 +10,12 @@
         />
         <meta charset="UTF-8">
     </head>
-    <header class="mx-5 my-5">
-        <div class="back">
-            <a th:href="@{/}"><img th:src="@{images/home-dark.png}" src="../static/images/home.png" alt="Page d'acceuil" width="70" height="70"></a>
-        </div>
-    </header>
     <body>
+        <header class="mx-5 my-5">
+            <div class="back">
+                <a th:href="@{/}"><img th:src="@{images/home-dark.png}" alt="Page d'accueil" width="70" height="70"></a>
+            </div>
+        </header>
         <div class="container">
             <div class="row my-5 mx-0">
                 <div class="col-auto">
@@ -25,6 +25,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <form class="needs-validation" th:action="@{/ajouter-membre}" th:object="${member}" id="membershipForm" method="POST" novalidate>
+
                         <div class="row">
                             <input type="hidden" th:field="*{permitNumber}">
                         </div>
@@ -65,7 +66,7 @@
                         <div class="row mb-5">
                             <label for="email" class="col-sm-2 col-form-label">Adresse courriel</label>
                             <div class="col-sm-10">
-                                <input type="email" th:field="*{email}" class="form-control" name="email" id="email" placeholder="alex@whatever.com" required>
+                                <input type="email" th:field="*{email}" class="form-control" name="email" id="email" placeholder="name@example.com" required>
                                 <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
                                 <div class="invalid-feedback">
                                     Ce champs est obligatoire.
