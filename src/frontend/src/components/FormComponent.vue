@@ -47,7 +47,13 @@ import ButtonComponent from "@/components/ButtonComponent";
       return {
         //TODO: Get the gender values from the backend instead of hardcoding them
         genders: ["MALE", "FEMALE", "OTHER"],
-        member: Object
+        member: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          gender: null,
+          passedExam: null
+        }
       }
     },
     methods: {
