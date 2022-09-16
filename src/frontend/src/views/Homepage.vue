@@ -19,7 +19,3 @@
   text-decoration: none ;
 }
 </style>
-<script>
-export default {
-}
-</script>
