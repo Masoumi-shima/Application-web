@@ -1,41 +1,84 @@
 <template>
-  <section>
-    <form class="form-box" @submit.prevent="submitForm">
-
-<!--      TODO: Form validation-->
-
-      <h1>Fomulaire d'enregistrement</h1>
-
-      <label for="firstName">Prénom</label>
-      <input v-model="member.firstName" name="firstName" type="text">
-
-      <label for="lastName">Nom</label>
-      <input v-model="member.lastName" name="lastName" type="text">
-
-      <label for="birthDate">Date de naissance</label>
-      <input v-model="member.birthDate" name="birthDate" type="date">
-
-      <label for="email">Adresse courriel</label>
-      <input v-model="member.email" name="email" type="email">
-
-      <div class="radio-box">
-        <p>Genre</p>
-        <div v-for="gender in genders" class="gender_values">
-          <input v-model="member.gender" :value="gender" name="gender" type="radio">
-          <label for="gender">{{gender}}</label>
-        </div>
+  <div class="container">
+    <div class="row my-5 mx-0">
+      <div class="col-auto">
+        <h1>Formulaire d'enregistrement</h1>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <form class="needs-validation" @submit.prevent="submitForm">
 
-      <div class="check-box">
-        <input v-model="member.passedExam" name="passedExam" type="checkbox">
-        <label for="passedExam">J'ai réussi l'examen de l'ordre.</label>
+          <div class="row mb-5">
+            <label for="firstName" class="col-sm-2 col-form-label">Prénom</label>
+            <div class="col-sm-10">
+              <input v-model="member.firstName" class="form-control" name="firstName" type="text">
+              <div class="invalid-feedback">
+                Ce champs est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
+            <div class="col-sm-10">
+              <input v-model="member.lastName" class="form-control" name="lastName" type="text">
+              <div class="invalid-feedback">
+                Ce champs est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <label for="birthDate" class="col-sm-2 col-form-label">Date de naissance</label>
+            <div class="col-sm-10">
+              <input v-model="member.birthDate" class="form-control" name="birthDate" type="date">
+              <div class="invalid-feedback">
+                Ce champs est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <label for="email" class="col-sm-2 col-form-label">Adresse courriel</label>
+            <div class="col-sm-10">
+              <input v-model="member.email" class="form-control" name="email" type="email">
+              <div class="invalid-feedback">
+                Ce champs est obligatoire.
+              </div>
+            </div>
+          </div>
+
+          <fieldset class="row mb-5">
+            <legend class="col-form-label col-sm-2 pt-0">Genre</legend>
+            <div class="col-sm-10">
+              <div v-for="gender in genders" class="form-check">
+                <input v-model="member.gender" class="form-check-input" :value="gender" name="gender" type="radio">
+                <label for="gender">{{gender}}</label>
+                <div class="invalid-feedback">
+                  Choisissez une option.
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+           <div class="row mb-5">
+             <div class="col-sm-10">
+               <div class="form-check">
+                 <input v-model="member.passedExam" class="form-check-input" name="passedExam" type="checkbox">
+                 <label for="passedExam" class="form-check-label">J'ai réussi l'examen de l'ordre.</label>
+               </div>
+             </div>
+           </div>
+
+          <ButtonComponent type="submit" class="btn-primary" title="Enregistrer" />
+          <ButtonComponent type="reset" class="btn-primary" title="Réinitialiser" />
+
+        </form>
+
       </div>
-
-      <ButtonComponent type="submit" class="btn-primary" title="Enregistrer" />
-      <ButtonComponent type="reset" class="btn-primary" title="Réinitialiser" />
-
-    </form>
-  </section>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -97,61 +140,3 @@ import ButtonComponent from "@/components/ButtonComponent";
     }
   }
 </script>
-
-<style>
-form {
-  padding: 40px;
-  font-size: 20px;
-}
-
-.form-box label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-p {
-  margin: 10px;
-}
-
-.check-box label {
-  display: inline;
-  margin-bottom: 10px;
-  font-size: 15px;
-  padding: 10px;
-}
-
-.form-box input {
-  width: 300px;
-  padding: 10px;
-  font-size: 15px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.gender_values {
-  font-size: 15px;
-  font-family: "Lato", sans-serif;
-  background-image: linear-gradient(
-      to right,
-      rgb(0, 0, 0) 0%,
-      rgb(50, 53, 56) 100%
-  );
-  color: aliceblue;
-  display: flex;
-  padding: 5px;
-}
-
-.radio-box input {
-  width: auto;
-}
-
-.radio-box label {
-  padding-left: 10px;
-}
-
-.check-box input {
-  width: auto;
-  margin-top: 30px;
-}
-
-</style>
