@@ -12,9 +12,9 @@
           <div class="row mb-5">
             <label for="firstName" class="col-sm-2 col-form-label">Prénom</label>
             <div class="col-sm-10">
-              <input v-model="member.firstName" class="form-control" name="firstName" type="text">
-              <div class="invalid-feedback">
-                Ce champs est obligatoire.
+              <input v-model="member.firstName" class="form-control" v-bind:class="{'is-invalid': firstNameError}" name="firstName" type="text">
+              <div class="invalid-feedback" v-if="errors[0]">
+                {{ errors[0].message }}
               </div>
             </div>
           </div>
@@ -22,9 +22,9 @@
           <div class="row mb-5">
             <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
             <div class="col-sm-10">
-              <input v-model="member.lastName" class="form-control" name="lastName" type="text">
-              <div class="invalid-feedback">
-                Ce champs est obligatoire.
+              <input v-model="member.lastName" class="form-control" v-bind:class="{'is-invalid': lastNameError}" name="lastName" type="text">
+              <div class="invalid-feedback" v-if="errors[0]">
+                {{ errors[0].message }}
               </div>
             </div>
           </div>
@@ -32,9 +32,9 @@
           <div class="row mb-5">
             <label for="birthDate" class="col-sm-2 col-form-label">Date de naissance</label>
             <div class="col-sm-10">
-              <input v-model="member.birthDate" class="form-control" name="birthDate" type="date">
-              <div class="invalid-feedback">
-                Ce champs est obligatoire.
+              <input v-model="member.birthDate" class="form-control" v-bind:class="{'is-invalid': birthDateError}" name="birthDate" type="date">
+              <div class="invalid-feedback" v-if="errors[0]">
+                {{ errors[0].message }}
               </div>
             </div>
           </div>
@@ -42,9 +42,9 @@
           <div class="row mb-5">
             <label for="email" class="col-sm-2 col-form-label">Adresse courriel</label>
             <div class="col-sm-10">
-              <input v-model="member.email" class="form-control" name="email" type="email">
-              <div class="invalid-feedback">
-                Ce champs est obligatoire.
+              <input v-model="member.email" class="form-control" v-bind:class="{'is-invalid' : emailError}" name="email" type="email">
+              <div class="invalid-feedback" v-if="errors[0]">
+                {{ errors[0].message}}
               </div>
             </div>
           </div>
@@ -53,10 +53,10 @@
             <legend class="col-form-label col-sm-2 pt-0">Genre</legend>
             <div class="col-sm-10">
               <div v-for="gender in genders" class="form-check">
-                <input v-model="member.gender" class="form-check-input" :value="gender" name="gender" type="radio">
+                <input v-model="member.gender" class="form-check-input" v-bind:class="{'is-invalid' : genderError}" :value="gender" name="gender" type="radio">
                 <label for="gender">{{gender}}</label>
-                <div class="invalid-feedback">
-                  Choisissez une option.
+                <div class="invalid-feedback" v-if="errors[4]">
+                  {{errors[4].message}}
                 </div>
               </div>
             </div>
@@ -89,6 +89,12 @@ import ButtonComponent from "@/components/ButtonComponent";
     data() {
       return {
         //TODO: Get the gender values from the backend instead of hardcoding them
+        firstNameError: false,
+        lastNameError: false,
+        birthDateError: false,
+        emailError: false,
+        genderError: false,
+        errors: [],
         genders: ["MALE", "FEMALE", "OTHER"],
         member: {
           firstName: '',
@@ -108,29 +114,61 @@ import ButtonComponent from "@/components/ButtonComponent";
             })
       },
       async submitForm() {
-        const newMember = {
-          firstName: this.member.firstName,
-          lastName: this.member.lastName,
-          birthDate: this.member.birthDate,
-          email: this.member.email,
-          gender: this.member.gender,
-          passedExam: this.member.passedExam
-        }
-        if(this.$route.params.id === '') {
-          await MemberService.createMember(newMember)
-              .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
-              .catch(e => {
-                console.log(e)
-              })
+        if (this.member.firstName === '') {
+          this.firstNameError = true
+          this.errors.push({
+            'message' : 'Ce champs est obligatoire.'
+          })
+          if (this.member.lastName === '') {
+            this.lastNameError = true
+            this.errors.push({
+              'message' : 'Ce champs est obligatoire.'
+            })
+          }
+          if (this.member.birthDate == null) {
+            this.birthDateError = true
+            this.errors.push({
+              'message' : 'Ce champs est obligatoire.'
+            })
+          }
+          if (this.member.email === '') {
+            this.emailError = true
+            this.errors.push({
+              'message' : 'Ce champs est obligatoire.'
+            })
+          }
+          if (this.member.gender === null) {
+            this.genderError = true
+            this.errors.push({
+              'message' : 'Choisissez une option.'
+            })
+          }
         }
         else {
-          await MemberService.updateMember(this.$route.params.id, newMember)
-              .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
-              .catch(e => {
-                console.log(e)
-              })
+          const newMember = {
+            firstName: this.member.firstName,
+            lastName: this.member.lastName,
+            birthDate: this.member.birthDate,
+            email: this.member.email,
+            gender: this.member.gender,
+            passedExam: this.member.passedExam
+          }
+          if(this.$route.params.id === '') {
+            await MemberService.createMember(newMember)
+                .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+                .catch(e => {
+                  console.log(e)
+                })
+          }
+          else {
+            await MemberService.updateMember(this.$route.params.id, newMember)
+                .then(response => this.$router.push('/membre/' + response.data.permitNumber + '/confirmation'))
+                .catch(e => {
+                  console.log(e)
+                })
+          }
         }
-      }
+        }
 
     },
     created() {
