@@ -12,7 +12,7 @@
           <div class="row mb-5">
             <label for="firstName" class="col-sm-2 col-form-label">Prénom</label>
             <div class="col-sm-10">
-              <input v-model="member.firstName" class="form-control" v-bind:class="{'is-invalid': firstNameError}" name="prénom" type="text">
+              <input v-model="member.firstName" class="form-control" v-bind:class="{'is-invalid': firstNameError}" name="prénom" type="text" @click="firstNameError=false">
               <div class="invalid-feedback" v-if="errors[0]">
                 {{ errors[0].message }}
               </div>
@@ -22,7 +22,7 @@
           <div class="row mb-5">
             <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
             <div class="col-sm-10">
-              <input v-model="member.lastName" class="form-control" v-bind:class="{'is-invalid': lastNameError}" name="nom" type="text">
+              <input v-model="member.lastName" class="form-control" v-bind:class="{'is-invalid': lastNameError}" name="nom" type="text" @click="lastNameError=false">
               <div class="invalid-feedback" v-if="errors[0]">
                 {{ errors[0].message }}
               </div>
@@ -32,7 +32,7 @@
           <div class="row mb-5">
             <label for="birthDate" class="col-sm-2 col-form-label">Date de naissance</label>
             <div class="col-sm-10">
-              <input v-model="member.birthDate" class="form-control" v-bind:class="{'is-invalid': birthDateError}" name="dateDeNaissance" type="date">
+              <input v-model="member.birthDate" class="form-control" v-bind:class="{'is-invalid': birthDateError}" name="dateDeNaissance" type="date" @click="birthDateError=false">
               <div class="invalid-feedback" v-if="errors[0]">
                 {{ errors[0].message }}
               </div>
@@ -42,7 +42,7 @@
           <div class="row mb-5">
             <label for="email" class="col-sm-2 col-form-label">Adresse courriel</label>
             <div class="col-sm-10">
-              <input v-model="member.email" class="form-control" v-bind:class="{'is-invalid' : emailError}" name="adresseCourriel" type="email">
+              <input v-model="member.email" class="form-control" v-bind:class="{'is-invalid' : emailError}" name="adresseCourriel" type="email" @click="emailError=false">
               <div class="invalid-feedback" v-if="errors[0]">
                 {{ errors[0].message}}
               </div>
@@ -53,7 +53,7 @@
             <legend class="col-form-label col-sm-2 pt-0">Genre</legend>
             <div class="col-sm-10">
               <div v-for="gender in genders" class="form-check">
-                <input v-model="member.gender" class="form-check-input" v-bind:class="{'is-invalid' : genderError}" :value="gender" name="genre" type="radio">
+                <input v-model="member.gender" class="form-check-input" v-bind:class="{'is-invalid' : genderError}" :value="gender" name="genre" type="radio" @click="genderError=false">
                 <label for="gender">{{gender}}</label>
                 <div class="invalid-feedback" v-if="errors[4]">
                   {{errors[4].message}}
