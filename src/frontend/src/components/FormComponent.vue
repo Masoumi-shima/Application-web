@@ -72,8 +72,6 @@
            </div>
 
           <ButtonComponent type="submit" class="btn-primary" title="Enregistrer" />
-          <ButtonComponent type="reset" class="btn-primary" title="Réinitialiser" />
-
         </form>
 
       </div>

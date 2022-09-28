@@ -102,7 +102,6 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary mr-5 mb-5">Enregistrer</button>
-                        <button type="reset" class="btn btn-primary ml-5 mb-5" th:classappend="*{permitNumber != null and permitNumber !=''} ? d-none">Réinitialiser</button>
                         <a role="button" class="btn btn-danger ml-5 mb-5" th:classappend="*{permitNumber == null or permitNumber ==''} ? d-none" th:href="@{/deleteMember(permitNumber=${member.permitNumber})}">Supprimer</a>
 
                     </form>
