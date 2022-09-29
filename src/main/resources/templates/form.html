@@ -7,12 +7,12 @@
                 rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous"
-        />
+        >
         <meta charset="UTF-8">
     </head>
     <body>
         <header class="mx-5 my-5">
-            <div class="back">
+            <div>
                 <a th:href="@{/}"><img th:src="@{images/home-dark.png}" alt="Page d'accueil" width="70" height="70"></a>
             </div>
         </header>
@@ -81,7 +81,7 @@
                             <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Name Error</div>
                             <div class="col-sm-10">
                                 <div class="form-check" th:each="genderValue : ${T(com.example.WebApplication.member.Gender).values()}">
-                                    <input class="form-check-input" type="radio" name="genre" th:id="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}" required>
+                                    <input class="form-check-input" type="radio" name="gender" th:id="${genderValue}" th:value="${genderValue}" th:checked="${member.gender} eq ${genderValue}" required>
                                     <label th:for="${genderValue}" th:text="${genderValue}"></label>
                                     <div class="invalid-feedback">
                                         Choisissez une option.
