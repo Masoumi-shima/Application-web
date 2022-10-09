@@ -115,8 +115,9 @@ import ButtonComponent from "@/components/ButtonComponent";
         if (this.member.firstName === '') {
           this.firstNameError = true
           this.errors.push({
-            'message' : 'Ce champs est obligatoire.'
+            'message': 'Ce champs est obligatoire.'
           })
+        }
           if (this.member.lastName === '') {
             this.lastNameError = true
             this.errors.push({
@@ -141,7 +142,6 @@ import ButtonComponent from "@/components/ButtonComponent";
               'message' : 'Choisissez une option.'
             })
           }
-        }
         else {
           const newMember = {
             firstName: this.member.firstName,
