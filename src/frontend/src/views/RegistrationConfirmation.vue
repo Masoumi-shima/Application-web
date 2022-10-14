@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h3 class="title">Vos informations sont enregistrées !</h3>
-    <MemberDetails />
+  <div class="container mt-5">
+    <div class="row">
+      <h3>Vos informations sont enregistrées !</h3>
+    </div>
+    <div class="row mt-2">
+      <MemberDetails />
+    </div>
   </div>
 </template>
 <script>
@@ -17,10 +21,3 @@ export default {
   }
 }
 </script>
-<style>
-  .title {
-    font-size: 24px;
-    color: aliceblue;
-    padding: 10px;
-  }
-</style>

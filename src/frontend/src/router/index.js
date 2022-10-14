@@ -21,7 +21,7 @@ const routes = [
     {
         path: '/ajouterMembre/:id?',
         name: 'Ajouter membre',
-        component: () => import('@/components/Form')
+        component: () => import('@/components/FormComponent')
     },
 
     {
